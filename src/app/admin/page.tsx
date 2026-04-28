@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, CalendarDays, TrendingUp, Users, Wallet } from 'lucide-react';
+import { ArrowRight, CalendarDays, ClipboardCheck, TrendingUp, Users, Wallet } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -23,6 +23,7 @@ const ACTION_LABELS: Record<string, { label: string; color: string }> = {
 const SHORTCUTS = [
   { href: '/admin/kpi', label: 'KPI 실적 입력', icon: TrendingUp, desc: '프로그램별 current 값 수정' },
   { href: '/admin/budget', label: '예산 집행 입력', icon: Wallet, desc: '집행액, 월별 실집행액 입력' },
+  { href: '/admin/operations', label: '운영관리 입력', icon: ClipboardCheck, desc: '증빙, 지원금, 성과측정, 상담 케이스 입력' },
   { href: '/admin/timeline', label: '일정 상태 관리', icon: CalendarDays, desc: '태스크 상태 변경' },
   { href: '/admin/programs/n', label: '참여자 관리', icon: Users, desc: 'N/E/S/T 참여자 추가·삭제' },
 ];

@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarDays, LayoutDashboard, LogOut, TrendingUp, Wallet } from 'lucide-react';
+import { CalendarDays, ClipboardCheck, LayoutDashboard, LogOut, TrendingUp, Wallet } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -11,6 +11,7 @@ const NAV = [
   { href: '/admin', label: '관리자 대시보드', icon: LayoutDashboard },
   { href: '/admin/kpi', label: 'KPI 실적 입력', icon: TrendingUp },
   { href: '/admin/budget', label: '예산 집행 입력', icon: Wallet },
+  { href: '/admin/operations', label: '운영관리 입력', icon: ClipboardCheck },
   { href: '/admin/timeline', label: '일정 상태 관리', icon: CalendarDays },
 ];
 
