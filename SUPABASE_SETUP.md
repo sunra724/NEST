@@ -15,6 +15,7 @@ SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ADMIN_PASSWORD=your-admin-password
+SITE_PASSWORD=your-intranet-access-password
 JWT_SECRET=your-long-random-secret
 JWT_EXPIRES_IN=8h
 ```
@@ -44,6 +45,8 @@ Supabase 환경변수가 없으면 로컬 JSON 파일을 계속 사용합니다.
 
 ## 공개/관리자 데이터 분리
 
+- `/login`은 업무용 열람 비밀번호인 `SITE_PASSWORD`를 사용합니다.
+- `/admin/login`은 데이터 수정용 관리자 비밀번호인 `ADMIN_PASSWORD`를 사용합니다.
 - 공개 요청: `/api/data/program-*`에서 참여자 `contact`, `registeredAt`, `note` 같은 관리자용 필드를 제거합니다.
 - 관리자 요청: 로그인 쿠키가 있으면 원본 문서를 반환하므로 참여자 관리 화면에서 연락처를 볼 수 있습니다.
 - 공개 프로그램 상세 페이지는 참여자 개별 정보가 아니라 총원과 기수/트랙별 집계만 표시합니다.

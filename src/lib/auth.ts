@@ -1,6 +1,9 @@
 import { SignJWT, jwtVerify } from 'jose';
+import type { JWTPayload } from 'jose';
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'fallback-secret');
+
+export type AuthRole = 'viewer' | 'admin';
 
 export async function signToken(payload: Record<string, string>): Promise<string> {
   return new SignJWT(payload)
@@ -17,4 +20,8 @@ export async function verifyToken(token: string) {
   } catch {
     return null;
   }
+}
+
+export function hasRole(payload: JWTPayload | null, role: AuthRole): boolean {
+  return payload?.role === role;
 }

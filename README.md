@@ -35,25 +35,20 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## 📝 데이터 업데이트 방법 (운영자용)
+## 🔐 접속 구조
 
-웹 대시보드는 **열람 전용**입니다. 데이터 수정은 로컬 JSON 파일에서만 합니다.
+- `/login`: 소이랩 업무용 열람 비밀번호(`SITE_PASSWORD`)로 접속
+- `/admin/login`: 관리자 비밀번호(`ADMIN_PASSWORD`)로 접속
+- `/admin`: KPI, 예산, 일정, 참여자 데이터를 수정하는 관리자 모드
 
-1. 프로젝트 클론 후 `public/data/` 폴더 열기
-2. 해당 JSON 수정:
-   - KPI 실적: `kpi.json` → `"current"` 값 변경 (예: `0` → `25`)
-   - 예산 집행: `budget.json` → `"spent"` 값 변경 (예: `0` → `12000`)
-   - 일정 상태: `timeline.json` → `"status"` 변경 (`"pending"` → `"in_progress"`)
-   - 참여자: `program-{id}.json` → `participants` 배열에 객체 추가
-3. `git add . && git commit -m "데이터 업데이트: YYYY.MM" && git push`
-4. Vercel 자동 배포 (약 1~2분 소요)
+Supabase 환경변수가 설정되어 있으면 관리자 수정 데이터는 Supabase `dashboard_documents`에 저장됩니다. 환경변수가 없으면 로컬 `public/data/*.json`을 fallback으로 사용합니다.
 
 ## 🔐 관리자 기능
 
 ### 로그인
-`localhost:3000/admin` → `/login` 리다이렉트 → 비밀번호 입력
+`localhost:3000/admin` → `/admin/login` 리다이렉트 → 관리자 비밀번호 입력
 
-비밀번호: `.env.local`의 `ADMIN_PASSWORD` 값
+관리자 비밀번호: `.env.local`의 `ADMIN_PASSWORD` 값
 
 ### 수정 가능 항목
 | 메뉴 | URL | 기능 |
@@ -64,9 +59,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 | 참여자 | /admin/programs/{n,e,s,t} | 참여자 추가·삭제 |
 
 ### 변경 이력
-모든 수정은 `public/data/changelog.json`에 자동 기록됩니다.
+모든 수정은 Supabase 또는 로컬 fallback의 `changelog` 문서에 자동 기록됩니다.
 
 ### ⚠️ 주의사항
-- 이 기능은 **로컬 실행 전용**입니다
-- Vercel 등 서버리스 환경에서는 `fs.writeFile`이 작동하지 않습니다
-- 배포된 URL은 열람 전용으로만 사용하세요
+- Vercel 배포에서는 `SITE_PASSWORD`, `ADMIN_PASSWORD`, `JWT_SECRET`, Supabase 환경변수를 반드시 설정합니다.
+- `SUPABASE_SERVICE_ROLE_KEY`는 서버 전용 환경변수로만 사용하고 `NEXT_PUBLIC_`를 붙이지 않습니다.

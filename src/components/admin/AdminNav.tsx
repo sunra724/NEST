@@ -28,7 +28,7 @@ export default function AdminNav() {
   async function handleLogout() {
     await fetch('/api/admin/auth', { method: 'DELETE' });
     toast.info('로그아웃되었습니다');
-    router.push('/login');
+    router.push('/admin/login');
   }
 
   return (

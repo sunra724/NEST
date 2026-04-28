@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isDashboardDocumentKey, readDocument } from '@/lib/data-store';
-import { verifyToken } from '@/lib/auth';
+import { hasRole, verifyToken } from '@/lib/auth';
 import { sanitizePublicDocument } from '@/lib/public-data';
 
 export const runtime = 'nodejs';
@@ -8,7 +8,7 @@ export const runtime = 'nodejs';
 async function isAdminRequest(request: NextRequest) {
   const token = request.cookies.get('admin_token')?.value;
   if (!token) return false;
-  return (await verifyToken(token)) !== null;
+  return hasRole(await verifyToken(token), 'admin');
 }
 
 export async function GET(request: NextRequest, context: { params: Promise<{ key: string }> }) {

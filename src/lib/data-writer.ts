@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { verifyToken } from '@/lib/auth';
+import { hasRole, verifyToken } from '@/lib/auth';
 import { filenameToDocumentKey, readDocument, writeDocument } from '@/lib/data-store';
 
 interface ChangelogDocument {
@@ -40,5 +40,5 @@ export async function verifyAdmin(): Promise<boolean> {
   const token = cookieStore.get('admin_token')?.value;
   if (!token) return false;
   const payload = await verifyToken(token);
-  return payload !== null;
+  return hasRole(payload, 'admin');
 }
