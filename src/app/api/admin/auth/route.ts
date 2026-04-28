@@ -1,16 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { signToken } from '@/lib/auth';
+import { getEnvValue, signToken } from '@/lib/auth';
 
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
-  const { password } = await request.json();
+  const { password } = await request.json().catch(() => ({ password: '' }));
 
-  if (password !== process.env.ADMIN_PASSWORD) {
+  if (password !== getEnvValue('ADMIN_PASSWORD')) {
     return NextResponse.json({ error: '비밀번호가 올바르지 않습니다' }, { status: 401 });
   }
 
-  const token = await signToken({ role: 'admin' });
+  let token: string;
+  try {
+    token = await signToken({ role: 'admin' });
+  } catch {
+    return NextResponse.json({ error: '로그인 설정을 확인해야 합니다' }, { status: 500 });
+  }
+
   const response = NextResponse.json({ ok: true });
   response.cookies.set('admin_token', token, {
     httpOnly: true,
