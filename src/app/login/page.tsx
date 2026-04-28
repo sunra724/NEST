@@ -42,8 +42,8 @@ export default function LoginPage() {
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100">
             <Lock className="h-7 w-7 text-indigo-600" />
           </div>
-          <h1 className="text-xl font-bold text-slate-800">N.E.S.T. 인트라넷</h1>
-          <p className="text-center text-sm text-slate-500">소이랩 업무용 성과관리 대시보드</p>
+          <h1 className="text-xl font-bold text-slate-800">N.E.S.T. 대시보드</h1>
+          <p className="text-center text-sm text-slate-500">소이랩 N.E.S.T 사업 성과관리 대시보드</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
