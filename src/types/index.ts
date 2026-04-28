@@ -173,10 +173,20 @@ export interface CasePipelineItem {
   status: OperationStatus;
 }
 
+export interface MonthlyReportEntry {
+  month: string;
+  highlights: string;
+  issues: string;
+  nextPlans: string;
+  supportNeeds: string;
+  updatedAt: string;
+}
+
 export interface OperationsData {
   lastUpdated: string;
   evidence: EvidenceGroup[];
   funding: FundingGroup[];
   measurements: MeasurementItem[];
   casePipeline: CasePipelineItem[];
+  monthlyReports?: MonthlyReportEntry[];
 }

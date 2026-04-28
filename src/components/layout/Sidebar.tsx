@@ -91,6 +91,7 @@ export default function Sidebar({ className }: SidebarProps) {
           </div>
 
           <MenuItem href="/timeline" label="추진 일정" icon={<CalendarDays className="h-4 w-4" />} active={isActivePath(pathname, '/timeline')} />
+          <MenuItem href="/monthly-report" label="월간보고" icon={<FileText className="h-4 w-4" />} active={isActivePath(pathname, '/monthly-report')} />
           <MenuItem href="/report" label="보고서" icon={<FileText className="h-4 w-4" />} active={isActivePath(pathname, '/report')} />
         </div>
       </div>
