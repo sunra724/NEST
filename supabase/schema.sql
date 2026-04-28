@@ -12,6 +12,7 @@ create table if not exists public.dashboard_documents (
       'program-e',
       'program-s',
       'program-t',
+      'operations',
       'changelog'
     )
   )

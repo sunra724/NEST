@@ -111,3 +111,66 @@ export interface ProgramParticipant {
   registeredAt: string;
   [key: string]: unknown;
 }
+
+export type OperationStatus = 'not_started' | 'in_progress' | 'completed' | 'risk';
+
+export interface EvidenceItem {
+  name: string;
+  type: string;
+  due: string;
+  status: OperationStatus;
+  owner: string;
+}
+
+export interface EvidenceGroup {
+  program: string;
+  label: string;
+  required: number;
+  completed: number;
+  items: EvidenceItem[];
+}
+
+export interface FundingDisbursement {
+  stage: string;
+  condition: string;
+  ratio?: number;
+  plannedAmount: number;
+  currentAmount: number;
+  status: OperationStatus;
+}
+
+export interface FundingGroup {
+  program: string;
+  label: string;
+  totalBudget: number;
+  disbursements: FundingDisbursement[];
+}
+
+export interface MeasurementItem {
+  program: string;
+  label: string;
+  tool: string;
+  target: string;
+  baseline: number;
+  followup: number;
+  current: number;
+  unit: string;
+  status: OperationStatus;
+}
+
+export interface CasePipelineItem {
+  program: string;
+  label: string;
+  target: number;
+  current: number;
+  unit: string;
+  status: OperationStatus;
+}
+
+export interface OperationsData {
+  lastUpdated: string;
+  evidence: EvidenceGroup[];
+  funding: FundingGroup[];
+  measurements: MeasurementItem[];
+  casePipeline: CasePipelineItem[];
+}

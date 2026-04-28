@@ -11,6 +11,7 @@ const DOCUMENT_KEYS = [
   'program-e',
   'program-s',
   'program-t',
+  'operations',
   'changelog',
 ];
 

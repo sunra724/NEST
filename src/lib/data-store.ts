@@ -11,6 +11,7 @@ export const DOCUMENT_KEYS = [
   'program-e',
   'program-s',
   'program-t',
+  'operations',
   'changelog',
 ] as const;
 
@@ -77,7 +78,7 @@ export async function readDocument<T>(key: DashboardDocumentKey): Promise<T> {
   }
 
   if (!row) {
-    throw new Error(`Dashboard document not found in Supabase: ${key}`);
+    return readLocalDocument<T>(key);
   }
 
   return row.data as T;

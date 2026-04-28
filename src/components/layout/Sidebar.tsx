@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarDays, ChevronDown, FileText, FolderKanban, LayoutDashboard, Lock, Wallet } from 'lucide-react';
+import { CalendarDays, ChevronDown, ClipboardCheck, FileText, FolderKanban, LayoutDashboard, Lock, Wallet } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NEST_COLORS } from '@/lib/constants';
@@ -62,6 +62,7 @@ export default function Sidebar({ className }: SidebarProps) {
         <div className="space-y-1">
           <MenuItem href="/" label="대시보드" icon={<LayoutDashboard className="h-4 w-4" />} active={isActivePath(pathname, '/')} />
           <MenuItem href="/budget" label="예산 관리" icon={<Wallet className="h-4 w-4" />} active={isActivePath(pathname, '/budget')} />
+          <MenuItem href="/operations" label="운영관리" icon={<ClipboardCheck className="h-4 w-4" />} active={isActivePath(pathname, '/operations')} />
 
           <div className={cn('rounded-md border border-slate-800', isProgramPath && 'bg-slate-800/70')}>
             <div className="flex items-center justify-between px-3 py-2 text-sm text-slate-200">
