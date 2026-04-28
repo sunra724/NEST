@@ -5,45 +5,31 @@
       "kpis": [
         {
           "id": "N-1",
-          "label": "상담 참여자 수",
+          "label": "참여자 수",
           "target": 100,
-          "current": 10,
-          "unit": "명"
-        },
-        {
-          "id": "N-2",
-          "label": "네트워크 참여율",
-          "target": 60,
-          "current": 40,
-          "unit": "%"
-        },
-        {
-          "id": "N-3",
-          "label": "또래멘토 양성",
-          "target": 20,
           "current": 0,
           "unit": "명"
         },
         {
-          "id": "N-4",
-          "label": "프로그램 이수율",
+          "id": "N-2",
+          "label": "운영 기수",
+          "target": 4,
+          "current": 0,
+          "unit": "기수"
+        },
+        {
+          "id": "N-3",
+          "label": "수료율",
           "target": 70,
           "current": 0,
           "unit": "%"
         },
         {
-          "id": "N-5",
-          "label": "사회적 고립감 개선도",
-          "target": 30,
-          "current": 0,
-          "unit": "% 감소"
-        },
-        {
-          "id": "N-6",
+          "id": "N-4",
           "label": "우울·불안 증상 개선율",
-          "target": 25,
+          "target": 50,
           "current": 0,
-          "unit": "% 개선"
+          "unit": "%"
         }
       ]
     },
@@ -59,24 +45,45 @@
         },
         {
           "id": "E-2",
+          "label": "팀 운영 수",
+          "target": 20,
+          "current": 0,
+          "unit": "팀"
+        },
+        {
+          "id": "E-3",
+          "label": "운영 기수",
+          "target": 2,
+          "current": 0,
+          "unit": "기수"
+        },
+        {
+          "id": "E-4",
+          "label": "프로젝트 진행 수",
+          "target": 20,
+          "current": 0,
+          "unit": "건"
+        },
+        {
+          "id": "E-5",
           "label": "프로토타입 실증",
           "target": 10,
           "current": 0,
           "unit": "건"
         },
         {
-          "id": "E-3",
-          "label": "정책제안",
-          "target": 10,
+          "id": "E-6",
+          "label": "수료율",
+          "target": 70,
           "current": 0,
-          "unit": "건(채택 5건)"
+          "unit": "%"
         },
         {
-          "id": "E-4",
-          "label": "정착률",
-          "target": 30,
+          "id": "E-7",
+          "label": "정책제안",
+          "target": 5,
           "current": 0,
-          "unit": "%(6팀)"
+          "unit": "건"
         }
       ]
     },
@@ -85,45 +92,38 @@
       "kpis": [
         {
           "id": "S-1",
-          "label": "지원팀 수",
+          "label": "선정팀 수",
           "target": 18,
           "current": 0,
           "unit": "팀"
         },
         {
           "id": "S-2",
-          "label": "사업 생존율",
-          "target": 50,
-          "current": 0,
-          "unit": "%(9팀)"
-        },
-        {
-          "id": "S-3",
-          "label": "신규 고용 창출",
-          "target": 15,
-          "current": 0,
-          "unit": "명"
-        },
-        {
-          "id": "S-4",
-          "label": "사업자등록",
-          "target": 15,
+          "label": "사업자 등록 확인",
+          "target": 18,
           "current": 0,
           "unit": "건"
         },
         {
-          "id": "S-5",
-          "label": "참여자 정착률",
-          "target": 60,
-          "current": 0,
-          "unit": "%"
-        },
-        {
-          "id": "S-6",
+          "id": "S-3",
           "label": "시제품·콘텐츠 개발",
           "target": 18,
           "current": 0,
           "unit": "건"
+        },
+        {
+          "id": "S-4",
+          "label": "사업 생존율",
+          "target": 50,
+          "current": 0,
+          "unit": "%"
+        },
+        {
+          "id": "S-5",
+          "label": "신규 고용 창출",
+          "target": 15,
+          "current": 0,
+          "unit": "명"
         }
       ]
     },
@@ -132,45 +132,52 @@
       "kpis": [
         {
           "id": "T-1",
-          "label": "전월세 상담",
-          "target": 200,
+          "label": "사전검토",
+          "target": 150,
           "current": 0,
           "unit": "건"
         },
         {
           "id": "T-2",
-          "label": "계약 사전검토",
-          "target": 160,
+          "label": "계약검토",
+          "target": 10,
           "current": 0,
-          "unit": "건(80%)"
+          "unit": "건"
         },
         {
           "id": "T-3",
-          "label": "계약동행 서비스",
-          "target": 50,
+          "label": "법률검토",
+          "target": 5,
           "current": 0,
           "unit": "건"
         },
         {
           "id": "T-4",
-          "label": "분쟁예방 교육",
-          "target": 3,
+          "label": "찾아가는 부스 운영",
+          "target": 2,
           "current": 0,
           "unit": "회"
         },
         {
           "id": "T-5",
-          "label": "표준문서 활용",
-          "target": 500,
+          "label": "찾아가는 강의 운영",
+          "target": 2,
           "current": 0,
-          "unit": "부"
+          "unit": "회"
         },
         {
           "id": "T-6",
-          "label": "위험계약 차단율",
-          "target": 80,
+          "label": "가이드라인 제작",
+          "target": 1,
           "current": 0,
-          "unit": "%"
+          "unit": "식"
+        },
+        {
+          "id": "T-7",
+          "label": "사업 성과영상",
+          "target": 1,
+          "current": 0,
+          "unit": "식"
         }
       ]
     }
@@ -204,6 +211,18 @@
     },
     "policyProposals": {
       "target": 5,
+      "current": 0
+    },
+    "businessRegistrations": {
+      "target": 18,
+      "current": 0
+    },
+    "prototypeOutputs": {
+      "target": 28,
+      "current": 0
+    },
+    "housingReviews": {
+      "target": 165,
       "current": 0
     },
     "damagePreventionAmount": {

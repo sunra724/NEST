@@ -5,12 +5,11 @@
       "label": "공통",
       "color": "#6366F1",
       "tasks": [
-        { "name": "계획 수립 및 협약", "months": [1, 2], "status": "completed" },
-        { "name": "추경 및 예산 확정", "months": [3], "status": "pending" },
-        { "name": "보조금 교부 및 착수", "months": [4], "status": "pending" },
-        { "name": "중간 점검", "months": [5, 6, 7, 9, 10], "status": "pending" },
+        { "name": "추경 심의 및 예산 확정", "months": [3], "status": "pending" },
+        { "name": "보조금 교부 및 사업 착수", "months": [4], "status": "pending" },
+        { "name": "사업 수행 및 상시 모니터링", "months": [4, 5, 6, 7, 8, 9, 10, 11], "status": "pending" },
         { "name": "통합 성과공유회", "months": [11], "status": "pending" },
-        { "name": "정산 및 최종보고", "months": [12], "status": "pending" }
+        { "name": "성과평가 및 보조금 정산 보고", "months": [12], "status": "pending" }
       ]
     },
     {
@@ -18,9 +17,16 @@
       "label": "[N] 마음충전소",
       "color": "#3B82F6",
       "tasks": [
-        { "name": "운영 준비 및 홍보", "months": [2, 3, 4], "status": "in_progress" },
-        { "name": "상담 프로그램 운영", "months": [4, 5, 6, 7, 8, 9, 10, 11], "status": "pending" },
-        { "name": "네트워크 프로그램", "months": [5, 6, 7, 8, 9, 10, 11], "status": "pending" }
+        { "name": "세부 설계 및 홍보", "months": [4], "status": "pending" },
+        { "name": "1기 모집·오리엔테이션", "months": [4], "status": "pending" },
+        { "name": "1기 상담·예술치료 운영", "months": [5, 6], "status": "pending" },
+        { "name": "2기 모집·오리엔테이션", "months": [5], "status": "pending" },
+        { "name": "2기 상담·예술치료 운영", "months": [6, 7], "status": "pending" },
+        { "name": "3기 모집·오리엔테이션", "months": [7], "status": "pending" },
+        { "name": "3기 상담·예술치료 운영", "months": [8, 9], "status": "pending" },
+        { "name": "4기 모집·오리엔테이션", "months": [9], "status": "pending" },
+        { "name": "4기 상담·예술치료 운영", "months": [10, 11], "status": "pending" },
+        { "name": "수료자 정기모임", "months": [6, 7, 8, 9, 10, 11], "status": "pending" }
       ]
     },
     {
@@ -29,14 +35,15 @@
       "color": "#10B981",
       "tasks": [
         { "name": "1기 모집 및 선발", "months": [4, 5], "status": "pending" },
-        { "name": "1기 킥오프", "months": [5], "status": "pending" },
-        { "name": "1기 리빙랩 활동", "months": [5, 6, 7], "status": "pending" },
-        { "name": "1기 마무리", "months": [7], "status": "pending" },
+        { "name": "1기 킥오프 및 발견", "months": [5, 6], "status": "pending" },
+        { "name": "1기 실험", "months": [7], "status": "pending" },
+        { "name": "1기 연결", "months": [8], "status": "pending" },
         { "name": "2기 모집 및 선발", "months": [6, 7], "status": "pending" },
-        { "name": "2기 킥오프", "months": [7], "status": "pending" },
-        { "name": "2기 리빙랩 활동", "months": [8, 9, 10], "status": "pending" },
-        { "name": "2기 마무리", "months": [10], "status": "pending" },
-        { "name": "통합 성과공유회", "months": [11], "status": "pending" }
+        { "name": "2기 킥오프 및 발견", "months": [7], "status": "pending" },
+        { "name": "2기 실험", "months": [8], "status": "pending" },
+        { "name": "2기 연결", "months": [9], "status": "pending" },
+        { "name": "활동 결과 수합", "months": [10], "status": "pending" },
+        { "name": "통합 성과공유회 및 정책제안", "months": [11], "status": "pending" }
       ]
     },
     {
@@ -44,17 +51,15 @@
       "label": "[S] 둥지 시드머니",
       "color": "#F59E0B",
       "tasks": [
-        { "name": "트랙1 공모 및 선발", "months": [4, 5], "status": "pending" },
-        { "name": "트랙1 협약 및 착수", "months": [5], "status": "pending" },
-        { "name": "트랙1 사업화", "months": [6, 7, 8], "status": "pending" },
-        { "name": "트랙1 중간점검", "months": [7], "status": "pending" },
-        { "name": "트랙1 마무리", "months": [9], "status": "pending" },
-        { "name": "트랙2 공모 및 선발", "months": [7, 8], "status": "pending" },
-        { "name": "트랙2 협약 및 착수", "months": [8], "status": "pending" },
-        { "name": "트랙2 사업화", "months": [9, 10, 11], "status": "pending" },
-        { "name": "트랙2 중간점검", "months": [10], "status": "pending" },
-        { "name": "트랙2 마무리", "months": [11], "status": "pending" },
-        { "name": "쇼케이스 및 데모데이", "months": [11], "status": "pending" }
+        { "name": "참여팀 모집", "months": [6, 7], "status": "pending" },
+        { "name": "심사·선정 및 오리엔테이션", "months": [7], "status": "pending" },
+        { "name": "협약 및 1차 자금 교부", "months": [7], "status": "pending" },
+        { "name": "Step1 기획·착수", "months": [7, 8], "status": "pending" },
+        { "name": "Step2 제작·개발 및 2차 교부", "months": [8, 9], "status": "pending" },
+        { "name": "Step3 시장검증 및 중간평가", "months": [9, 10], "status": "pending" },
+        { "name": "Step4 성과확산 및 3차 교부", "months": [10], "status": "pending" },
+        { "name": "쇼케이스·성과공유회·1차 점검", "months": [11], "status": "pending" },
+        { "name": "팀별 회계감사 및 성과정리", "months": [12], "status": "pending" }
       ]
     },
     {
@@ -62,10 +67,11 @@
       "label": "[T] 안심전월세 지킴이",
       "color": "#EF4444",
       "tasks": [
-        { "name": "운영 준비 및 홍보", "months": [2, 3, 4], "status": "in_progress" },
-        { "name": "상담창구 운영", "months": [4, 5, 6, 7, 8, 9, 10, 11], "status": "pending" },
-        { "name": "계약동행 서비스", "months": [4, 5, 6, 7, 8, 9, 10, 11], "status": "pending" },
-        { "name": "분쟁예방 교육", "months": [5, 7, 9, 11], "status": "pending" }
+        { "name": "협력체계 구축", "months": [4, 5], "status": "pending" },
+        { "name": "상담신청 환경 및 교보재 제작", "months": [5], "status": "pending" },
+        { "name": "사전검토·계약검토·법률검토 운영", "months": [5, 6, 7, 8, 9, 10, 11], "status": "pending" },
+        { "name": "찾아가는 부스·강의 운영", "months": [7, 8, 9, 10, 11], "status": "pending" },
+        { "name": "성과정리 및 성과영상 제작", "months": [11], "status": "pending" }
       ]
     }
   ]

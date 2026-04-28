@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { formatNumber, formatPercent } from '@/lib/utils';
-import type { BudgetData, KpiData, KpiItem, OverviewData } from '@/types';
+import type { BudgetData, KpiData, OverviewData } from '@/types';
 
 interface QuarterReportViewProps {
   overview: OverviewData;
@@ -20,21 +20,17 @@ const quarterOptions = [
   { id: 4, label: '4분기 10~12월', period: '2026.10~12' },
 ];
 
-function sliceKpis(items: KpiItem[], count: number) {
-  return items.slice(0, count);
-}
-
 export default function QuarterReportView({ overview, kpi, budget }: QuarterReportViewProps) {
   const [quarter, setQuarter] = useState(1);
   const selectedQuarter = quarterOptions.find((item) => item.id === quarter) ?? quarterOptions[0];
 
   const kpiRows = useMemo(() => {
     const rows = [
-      ...sliceKpis(kpi.programs.N?.kpis ?? [], 3).map((item) => ({ group: 'N', ...item })),
-      ...sliceKpis(kpi.programs.E?.kpis ?? [], 3).map((item) => ({ group: 'E', ...item })),
-      ...sliceKpis(kpi.programs.S?.kpis ?? [], 3).map((item) => ({ group: 'S', ...item })),
-      ...sliceKpis(kpi.programs.T?.kpis ?? [], 3).map((item) => ({ group: 'T', ...item })),
-      ...sliceKpis(kpi.common.kpis ?? [], 1).map((item) => ({ group: '공통', ...item })),
+      ...(kpi.programs.N?.kpis ?? []).map((item) => ({ group: 'N', ...item })),
+      ...(kpi.programs.E?.kpis ?? []).map((item) => ({ group: 'E', ...item })),
+      ...(kpi.programs.S?.kpis ?? []).map((item) => ({ group: 'S', ...item })),
+      ...(kpi.programs.T?.kpis ?? []).map((item) => ({ group: 'T', ...item })),
+      ...(kpi.common.kpis ?? []).map((item) => ({ group: '공통', ...item })),
     ];
     return rows;
   }, [kpi]);
@@ -75,7 +71,7 @@ export default function QuarterReportView({ overview, kpi, budget }: QuarterRepo
           <div className="mb-3 h-[5px] w-24 rounded bg-blue-600" />
           <h1 className="text-2xl font-bold text-slate-900">청년 N.E.S.T. 분기 보고서</h1>
           <p className="mt-2 text-sm text-slate-600">
-            분기: {selectedQuarter.label} ({selectedQuarter.period}) | 작성일: 2026.02 | 기관: 대구광역시 남구 / 협동조합 소이랩
+            분기: {selectedQuarter.label} ({selectedQuarter.period}) | 기준일: {overview.lastUpdated} | 기관: 대구광역시 남구 / 협동조합 소이랩
           </p>
         </header>
 
@@ -85,7 +81,9 @@ export default function QuarterReportView({ overview, kpi, budget }: QuarterRepo
             <div className="space-y-2 text-sm text-slate-700">
               <p>사업명: {overview.projectName}</p>
               <p>총예산: {formatNumber(overview.totalBudget)}천원</p>
-              <p>기간: 2026.01~12</p>
+              <p>
+                기간: {overview.period.start.replace('-', '.')}~{overview.period.end.replace('2026-', '')}
+              </p>
               <p>운영기관: {overview.operator}</p>
             </div>
             <div className="mt-3 overflow-x-auto">

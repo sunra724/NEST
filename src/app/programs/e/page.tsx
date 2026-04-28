@@ -9,10 +9,10 @@ import type { KpiData, OverviewData, ProgramDetailData } from '@/types';
 
 interface ProgramEData extends ProgramDetailData {
   funding?: {
-    stage1: number;
-    stage2Max: number;
-    totalMax: number;
-    unit: string;
+    individualSupport?: number;
+    teamSupport?: number;
+    individualUnit?: string;
+    teamUnit?: string;
   };
   foreignStudentTarget?: string;
 }
@@ -70,12 +70,18 @@ export default async function ProgramEPage() {
           <TabsContent value="funding" className="mt-4">
             <div className="grid gap-3 sm:grid-cols-2">
               <article className="rounded-lg border border-slate-200 p-4">
-                <p className="text-sm text-slate-500">1단계 지원</p>
-                <p className="mt-1 text-xl font-bold text-slate-900">{formatNumber(program.funding?.stage1 ?? 0)}천원/팀</p>
+                <p className="text-sm text-slate-500">개인 활동지원</p>
+                <p className="mt-1 text-xl font-bold text-slate-900">
+                  {formatNumber(program.funding?.individualSupport ?? 0)}
+                  {program.funding?.individualUnit ?? '천원/인'}
+                </p>
               </article>
               <article className="rounded-lg border border-slate-200 p-4">
-                <p className="text-sm text-slate-500">2단계 최대</p>
-                <p className="mt-1 text-xl font-bold text-slate-900">{formatNumber(program.funding?.stage2Max ?? 0)}천원/팀</p>
+                <p className="text-sm text-slate-500">팀 프로젝트 지원</p>
+                <p className="mt-1 text-xl font-bold text-slate-900">
+                  {formatNumber(program.funding?.teamSupport ?? 0)}
+                  {program.funding?.teamUnit ?? '천원/팀'}
+                </p>
               </article>
             </div>
           </TabsContent>

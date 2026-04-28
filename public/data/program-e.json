@@ -8,17 +8,17 @@
   ],
   "stages": [
     { "name": "발견", "duration": "4주", "activities": ["지역문제 발굴", "현장조사"] },
-    { "name": "실험", "duration": "8주", "activities": ["프로토타입 제작", "실증"] },
-    { "name": "연결", "duration": "4주", "activities": ["정책제안", "협력기관 연계"] },
+    { "name": "실험", "duration": "7주", "activities": ["아이디어 구체화", "프로토타입 제작", "현장 실증"] },
+    { "name": "연결", "duration": "3주", "activities": ["효과 측정", "정책제안", "협력기관 연계"] },
     { "name": "확산", "duration": "11월~", "activities": ["성과공유회", "지속 활동"] }
   ],
   "funding": {
-    "stage1": 3000,
-    "stage2Max": 5000,
-    "totalMax": 8000,
-    "unit": "천원/팀"
+    "individualSupport": 800,
+    "teamSupport": 5000,
+    "individualUnit": "천원/인",
+    "teamUnit": "천원/팀"
   },
-  "foreignStudentTarget": "10% 참여 권장",
+  "foreignStudentTarget": "다문화 관점 확보를 위한 외국인 유학생 참여 독려",
   "partners": ["계명대", "대구교대", "대구대", "영남이공대", "대구상공회의소"],
   "connections": [
     { "target": "[S]", "desc": "우수팀 트랙2 우선 선발" },

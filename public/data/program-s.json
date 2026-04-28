@@ -7,22 +7,22 @@
       "label": "콘텐츠",
       "teams": 10,
       "budgetPerTeam": 8500,
-      "period": "4~9월",
+      "period": "2026.07~10",
       "focus": "공연·전시·영상 창작, 대명공연거리 활용"
     },
     "track2": {
       "label": "로컬창업",
       "teams": 8,
       "budgetPerTeam": 10000,
-      "period": "7~11월",
+      "period": "2026.07~10",
       "focus": "지역자원 기반 제품·서비스, 전통시장 연계"
     }
   },
   "stages": [
-    { "name": "기획착수", "duration": "4주" },
-    { "name": "제작개발", "duration": "8주" },
-    { "name": "시장검증", "duration": "8주" },
-    { "name": "성과확산", "duration": "4~8주" }
+    { "name": "기획·착수", "duration": "3주", "activities": ["사업계획 구체화", "BM 캔버스", "1차 자금 교부 40%"] },
+    { "name": "제작·개발", "duration": "4주", "activities": ["시제품 제작", "전문가 멘토링", "2차 자금 교부 30%"] },
+    { "name": "시장검증", "duration": "4주", "activities": ["중간평가", "파일럿 판매", "고객 피드백"] },
+    { "name": "성과확산", "duration": "4주", "activities": ["3차 자금 교부 30%", "쇼케이스", "통합 성과공유회"] }
   ],
   "fundingSchedule": [40, 30, 30],
   "localResources": ["대명공연거리", "앞산·겨울스토리", "전통시장·상권", "대학가", "남구청년센터"],

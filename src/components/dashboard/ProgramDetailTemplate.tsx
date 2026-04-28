@@ -52,6 +52,7 @@ export default function ProgramDetailTemplate({ programId, data }: ProgramDetail
     index: idx + 1,
     name: stage.name,
     duration: stage.duration,
+    activities: stage.activities ?? [],
   }));
   const participantSummary = data.participantSummary ?? {
     total: data.participants.length,
@@ -123,11 +124,14 @@ export default function ProgramDetailTemplate({ programId, data }: ProgramDetail
         <div className="flex flex-col gap-2 xl:flex-row xl:items-center">
           {stageRows.map((stage, idx) => (
             <div key={stage.name} className="flex items-center gap-2">
-              <div className="flex min-w-[180px] items-center gap-2 rounded-lg border border-slate-200 px-3 py-2">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-700">{stage.index}</span>
+              <div className="flex min-w-[200px] items-start gap-2 rounded-lg border border-slate-200 px-3 py-2">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-700">
+                  {stage.index}
+                </span>
                 <div>
                   <p className="text-sm font-medium text-slate-800">{stage.name}</p>
                   <p className="text-xs text-slate-500">{stage.duration}</p>
+                  {stage.activities.length > 0 ? <p className="mt-1 text-xs leading-5 text-slate-600">{stage.activities.join(' · ')}</p> : null}
                 </div>
               </div>
               {idx < stageRows.length - 1 && <span className="hidden text-slate-400 xl:inline">→</span>}
