@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatNumber, formatPercent } from '@/lib/utils';
-import type { OperationStatus, OperationsData } from '@/types';
+import type { EvidenceSource, OperationStatus, OperationsData } from '@/types';
 
 interface Props {
   data: OperationsData;
@@ -23,6 +23,20 @@ const STATUS_OPTIONS: { value: OperationStatus; label: string }[] = [
   { value: 'risk', label: '주의' },
 ];
 
+const EVIDENCE_STATUS_OPTIONS: { value: OperationStatus; label: string }[] = [
+  { value: 'not_started', label: '대기' },
+  { value: 'in_progress', label: '준비중' },
+  { value: 'completed', label: '등록완료' },
+  { value: 'risk', label: '보완필요' },
+];
+
+const SOURCE_OPTIONS: { value: EvidenceSource; label: string }[] = [
+  { value: 'botem-e', label: '보탬e' },
+  { value: 'google-drive', label: 'Google Drive' },
+  { value: 'internal', label: '내부보관' },
+  { value: 'other', label: '기타' },
+];
+
 const STATUS_VARIANTS: Record<OperationStatus, 'pending' | 'info' | 'success' | 'amber'> = {
   not_started: 'pending',
   in_progress: 'info',
@@ -30,19 +44,36 @@ const STATUS_VARIANTS: Record<OperationStatus, 'pending' | 'info' | 'success' | 
   risk: 'amber',
 };
 
-function statusLabel(status: OperationStatus) {
-  return STATUS_OPTIONS.find((option) => option.value === status)?.label ?? status;
+interface EvidenceEdit {
+  status: OperationStatus;
+  source: EvidenceSource;
+  referenceNo: string;
+  url: string;
+  submittedAt: string;
+  memo: string;
+}
+
+function statusLabel(status: OperationStatus, evidence = false) {
+  const options = evidence ? EVIDENCE_STATUS_OPTIONS : STATUS_OPTIONS;
+  return options.find((option) => option.value === status)?.label ?? status;
+}
+
+function sourceLabel(source: EvidenceSource) {
+  return SOURCE_OPTIONS.find((option) => option.value === source)?.label ?? source;
 }
 
 function StatusSelect({
   value,
   onChange,
   disabled,
+  evidence = false,
 }: {
   value: OperationStatus;
   onChange: (status: OperationStatus) => void;
   disabled?: boolean;
+  evidence?: boolean;
 }) {
+  const options = evidence ? EVIDENCE_STATUS_OPTIONS : STATUS_OPTIONS;
   return (
     <select
       className="h-9 rounded-md border border-slate-300 bg-white px-2 text-sm text-slate-700 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:opacity-50"
@@ -50,7 +81,7 @@ function StatusSelect({
       disabled={disabled}
       onChange={(event) => onChange(event.target.value as OperationStatus)}
     >
-      {STATUS_OPTIONS.map((option) => (
+      {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>
@@ -59,8 +90,25 @@ function StatusSelect({
   );
 }
 
-function StatusBadge({ status }: { status: OperationStatus }) {
-  return <Badge variant={STATUS_VARIANTS[status]}>{statusLabel(status)}</Badge>;
+function SourceSelect({ value, onChange, disabled }: { value: EvidenceSource; onChange: (source: EvidenceSource) => void; disabled?: boolean }) {
+  return (
+    <select
+      className="h-9 rounded-md border border-slate-300 bg-white px-2 text-sm text-slate-700 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:opacity-50"
+      value={value}
+      disabled={disabled}
+      onChange={(event) => onChange(event.target.value as EvidenceSource)}
+    >
+      {SOURCE_OPTIONS.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function StatusBadge({ status, evidence = false }: { status: OperationStatus; evidence?: boolean }) {
+  return <Badge variant={STATUS_VARIANTS[status]}>{statusLabel(status, evidence)}</Badge>;
 }
 
 function SaveButton({ changed, saving, onClick }: { changed: boolean; saving: boolean; onClick: () => void }) {
@@ -72,7 +120,7 @@ function SaveButton({ changed, saving, onClick }: { changed: boolean; saving: bo
 }
 
 export default function OperationsEditor({ data, onSaved }: Props) {
-  const [evidenceEdits, setEvidenceEdits] = useState<Record<string, OperationStatus>>({});
+  const [evidenceEdits, setEvidenceEdits] = useState<Record<string, EvidenceEdit>>({});
   const [fundingEdits, setFundingEdits] = useState<Record<string, { currentAmount: number; status: OperationStatus }>>({});
   const [measurementEdits, setMeasurementEdits] = useState<Record<string, { current: number; status: OperationStatus }>>({});
   const [caseEdits, setCaseEdits] = useState<Record<string, { current: number; status: OperationStatus }>>({});
@@ -96,6 +144,19 @@ export default function OperationsEditor({ data, onSaved }: Props) {
     }
   }
 
+  function getEvidenceEdit(key: string, item: OperationsData['evidence'][number]['items'][number]): EvidenceEdit {
+    return (
+      evidenceEdits[key] ?? {
+        status: item.status,
+        source: item.source ?? 'internal',
+        referenceNo: item.referenceNo ?? '',
+        url: item.url ?? '',
+        submittedAt: item.submittedAt ?? '',
+        memo: item.memo ?? '',
+      }
+    );
+  }
+
   return (
     <Tabs defaultValue="evidence" className="space-y-4">
       <TabsList className="flex flex-wrap">
@@ -112,7 +173,7 @@ export default function OperationsEditor({ data, onSaved }: Props) {
               <div>
                 <h2 className="font-semibold text-slate-800">{group.label}</h2>
                 <p className="mt-1 text-xs text-slate-500">
-                  완료 {formatNumber(group.completed)} / 필수 {formatNumber(group.required)}개
+                  등록완료 {formatNumber(group.completed)} / 필수 {formatNumber(group.required)}개
                 </p>
               </div>
               <Badge variant="secondary">{formatPercent(group.completed, group.required)}%</Badge>
@@ -122,36 +183,90 @@ export default function OperationsEditor({ data, onSaved }: Props) {
                 <TableHeader>
                   <TableRow>
                     <TableHead>항목</TableHead>
-                    <TableHead>유형</TableHead>
-                    <TableHead>기한</TableHead>
-                    <TableHead>담당</TableHead>
-                    <TableHead>현재</TableHead>
-                    <TableHead>변경</TableHead>
+                    <TableHead>출처</TableHead>
+                    <TableHead>관리번호</TableHead>
+                    <TableHead>링크</TableHead>
+                    <TableHead>등록일</TableHead>
+                    <TableHead>메모</TableHead>
+                    <TableHead>상태</TableHead>
                     <TableHead />
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {group.items.map((item) => {
                     const key = `${group.program}|${item.name}`;
-                    const editStatus = evidenceEdits[key] ?? item.status;
-                    const changed = editStatus !== item.status;
+                    const edit = getEvidenceEdit(key, item);
+                    const changed =
+                      edit.status !== item.status ||
+                      edit.source !== (item.source ?? 'internal') ||
+                      edit.referenceNo !== (item.referenceNo ?? '') ||
+                      edit.url !== (item.url ?? '') ||
+                      edit.submittedAt !== (item.submittedAt ?? '') ||
+                      edit.memo !== (item.memo ?? '');
                     return (
                       <TableRow key={key}>
-                        <TableCell className="min-w-52 font-medium text-slate-800">{item.name}</TableCell>
-                        <TableCell>{item.type}</TableCell>
-                        <TableCell>{item.due}</TableCell>
-                        <TableCell>{item.owner}</TableCell>
-                        <TableCell>
-                          <StatusBadge status={item.status} />
+                        <TableCell className="min-w-56">
+                          <p className="font-medium text-slate-800">{item.name}</p>
+                          <p className="mt-1 text-xs text-slate-500">
+                            {item.type} · {item.due} · {item.owner}
+                          </p>
+                          <p className="mt-1 text-xs text-slate-400">현재 출처: {sourceLabel(item.source ?? 'internal')}</p>
                         </TableCell>
                         <TableCell>
-                          <StatusSelect value={editStatus} disabled={saving === key} onChange={(status) => setEvidenceEdits((prev) => ({ ...prev, [key]: status }))} />
+                          <SourceSelect
+                            value={edit.source}
+                            disabled={saving === key}
+                            onChange={(source) => setEvidenceEdits((prev) => ({ ...prev, [key]: { ...edit, source } }))}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            className="w-40"
+                            placeholder="보탬e 번호/내부번호"
+                            value={edit.referenceNo}
+                            onChange={(event) => setEvidenceEdits((prev) => ({ ...prev, [key]: { ...edit, referenceNo: event.target.value } }))}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            className="w-56"
+                            placeholder="Drive 또는 외부 URL"
+                            value={edit.url}
+                            onChange={(event) => setEvidenceEdits((prev) => ({ ...prev, [key]: { ...edit, url: event.target.value } }))}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            type="date"
+                            className="w-36"
+                            value={edit.submittedAt}
+                            onChange={(event) => setEvidenceEdits((prev) => ({ ...prev, [key]: { ...edit, submittedAt: event.target.value } }))}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            className="w-56"
+                            placeholder="미비사항 또는 보관 위치"
+                            value={edit.memo}
+                            onChange={(event) => setEvidenceEdits((prev) => ({ ...prev, [key]: { ...edit, memo: event.target.value } }))}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <div className="space-y-2">
+                            <StatusBadge status={item.status} evidence />
+                            <StatusSelect
+                              value={edit.status}
+                              disabled={saving === key}
+                              evidence
+                              onChange={(status) => setEvidenceEdits((prev) => ({ ...prev, [key]: { ...edit, status } }))}
+                            />
+                          </div>
                         </TableCell>
                         <TableCell>
                           <SaveButton
                             changed={changed}
                             saving={saving === key}
-                            onClick={() => save({ type: 'evidence', program: group.program, name: item.name, status: editStatus }, key, '증빙 상태를 저장했습니다')}
+                            onClick={() => save({ type: 'evidence', program: group.program, name: item.name, ...edit }, key, '증빙 정보를 저장했습니다')}
                           />
                         </TableCell>
                       </TableRow>

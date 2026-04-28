@@ -113,6 +113,7 @@ export interface ProgramParticipant {
 }
 
 export type OperationStatus = 'not_started' | 'in_progress' | 'completed' | 'risk';
+export type EvidenceSource = 'botem-e' | 'google-drive' | 'internal' | 'other';
 
 export interface EvidenceItem {
   name: string;
@@ -120,6 +121,11 @@ export interface EvidenceItem {
   due: string;
   status: OperationStatus;
   owner: string;
+  source: EvidenceSource;
+  referenceNo: string;
+  url: string;
+  submittedAt: string;
+  memo: string;
 }
 
 export interface EvidenceGroup {

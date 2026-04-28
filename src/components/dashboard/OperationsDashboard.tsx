@@ -1,12 +1,12 @@
 'use client';
 
-import { Archive, FileCheck2, HandCoins, Home, LineChart } from 'lucide-react';
+import { Archive, ExternalLink, FileCheck2, HandCoins, Home, LineChart } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { formatNumber, formatPercent } from '@/lib/utils';
-import type { EvidenceGroup, FundingGroup, OperationStatus, OperationsData } from '@/types';
+import type { EvidenceGroup, EvidenceSource, FundingGroup, OperationStatus, OperationsData } from '@/types';
 
 interface OperationsDashboardProps {
   data: OperationsData;
@@ -19,9 +19,27 @@ const statusMap: Record<OperationStatus, { label: string; variant: 'pending' | '
   risk: { label: '주의', variant: 'amber' },
 };
 
-function StatusBadge({ status }: { status: OperationStatus }) {
-  const meta = statusMap[status] ?? statusMap.not_started;
+const evidenceStatusMap: Record<OperationStatus, { label: string; variant: 'pending' | 'info' | 'success' | 'amber' }> = {
+  not_started: { label: '대기', variant: 'pending' },
+  in_progress: { label: '준비중', variant: 'info' },
+  completed: { label: '등록완료', variant: 'success' },
+  risk: { label: '보완필요', variant: 'amber' },
+};
+
+const sourceMap: Record<EvidenceSource, string> = {
+  'botem-e': '보탬e',
+  'google-drive': 'Google Drive',
+  internal: '내부보관',
+  other: '기타',
+};
+
+function StatusBadge({ status, evidence = false }: { status: OperationStatus; evidence?: boolean }) {
+  const meta = evidence ? evidenceStatusMap[status] : statusMap[status];
   return <Badge variant={meta.variant}>{meta.label}</Badge>;
+}
+
+function SourceBadge({ source }: { source: EvidenceSource }) {
+  return <Badge variant={source === 'botem-e' ? 'amber' : source === 'google-drive' ? 'info' : 'secondary'}>{sourceMap[source] ?? source}</Badge>;
 }
 
 function evidenceTotals(groups: EvidenceGroup[]) {
@@ -29,9 +47,11 @@ function evidenceTotals(groups: EvidenceGroup[]) {
     (acc, group) => {
       acc.required += group.required;
       acc.completed += group.completed;
+      acc.linked += group.items.filter((item) => item.url || item.referenceNo || item.submittedAt).length;
+      acc.needsReview += group.items.filter((item) => item.status === 'risk').length;
       return acc;
     },
-    { required: 0, completed: 0 },
+    { required: 0, completed: 0, linked: 0, needsReview: 0 },
   );
 }
 
@@ -76,7 +96,7 @@ export default function OperationsDashboard({ data }: OperationsDashboardProps) 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Operations</p>
             <h1 className="mt-1 text-2xl font-bold text-slate-900">보조금 운영관리</h1>
-            <p className="mt-2 text-sm text-slate-600">증빙자료, 지원금 교부, 성과측정, 주거 상담 케이스를 사업계획서 기준으로 점검합니다.</p>
+            <p className="mt-2 text-sm text-slate-600">보탬e, Google Drive, 내부보관 위치를 나눠 증빙 상태와 찾을 위치를 점검합니다.</p>
           </div>
           <Badge variant="outline">기준일 {data.lastUpdated}</Badge>
         </div>
@@ -85,21 +105,21 @@ export default function OperationsDashboard({ data }: OperationsDashboardProps) 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <SummaryCard
           icon={<FileCheck2 className="h-5 w-5" />}
-          label="증빙 완료율"
+          label="증빙 등록완료율"
           value={`${formatPercent(evidence.completed, evidence.required)}%`}
-          helper={`${formatNumber(evidence.completed)} / ${formatNumber(evidence.required)}개`}
+          helper={`${formatNumber(evidence.completed)} / ${formatNumber(evidence.required)}개, 보완 ${formatNumber(evidence.needsReview)}개`}
+        />
+        <SummaryCard
+          icon={<ExternalLink className="h-5 w-5" />}
+          label="위치 기록"
+          value={`${formatPercent(evidence.linked, evidence.required)}%`}
+          helper={`${formatNumber(evidence.linked)}개 항목에 번호·링크·등록일 기록`}
         />
         <SummaryCard
           icon={<HandCoins className="h-5 w-5" />}
           label="교부 진행률"
           value={`${formatPercent(funding.current, funding.planned)}%`}
           helper={`${formatNumber(funding.current)} / ${formatNumber(funding.planned)}천원`}
-        />
-        <SummaryCard
-          icon={<LineChart className="h-5 w-5" />}
-          label="성과측정 항목"
-          value={`${formatNumber(data.measurements.length)}개`}
-          helper="사전·사후 또는 만족도 기반"
         />
         <SummaryCard
           icon={<Home className="h-5 w-5" />}
@@ -124,7 +144,7 @@ export default function OperationsDashboard({ data }: OperationsDashboardProps) 
                 <div>
                   <h2 className="text-lg font-semibold text-slate-900">{group.label}</h2>
                   <p className="mt-1 text-sm text-slate-500">
-                    완료 {formatNumber(group.completed)} / 필수 {formatNumber(group.required)}
+                    등록완료 {formatNumber(group.completed)} / 필수 {formatNumber(group.required)}
                   </p>
                 </div>
                 <Badge variant="secondary">{formatPercent(group.completed, group.required)}%</Badge>
@@ -135,21 +155,38 @@ export default function OperationsDashboard({ data }: OperationsDashboardProps) 
                     <TableHeader>
                       <TableRow>
                         <TableHead>증빙 항목</TableHead>
-                        <TableHead>유형</TableHead>
-                        <TableHead>기한</TableHead>
-                        <TableHead>담당</TableHead>
+                        <TableHead>출처</TableHead>
+                        <TableHead>관리번호·링크</TableHead>
+                        <TableHead>등록일</TableHead>
+                        <TableHead>메모</TableHead>
                         <TableHead>상태</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {group.items.map((item) => (
                         <TableRow key={`${group.program}-${item.name}`}>
-                          <TableCell>{item.name}</TableCell>
-                          <TableCell>{item.type}</TableCell>
-                          <TableCell>{item.due}</TableCell>
-                          <TableCell>{item.owner}</TableCell>
+                          <TableCell className="min-w-56">
+                            <p className="font-medium text-slate-800">{item.name}</p>
+                            <p className="mt-1 text-xs text-slate-500">
+                              {item.type} · {item.due} · {item.owner}
+                            </p>
+                          </TableCell>
                           <TableCell>
-                            <StatusBadge status={item.status} />
+                            <SourceBadge source={item.source} />
+                          </TableCell>
+                          <TableCell className="min-w-48">
+                            {item.referenceNo ? <p className="text-sm text-slate-700">{item.referenceNo}</p> : <p className="text-sm text-slate-400">번호 미입력</p>}
+                            {item.url ? (
+                              <a href={item.url} target="_blank" rel="noreferrer" className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700">
+                                위치 열기
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            ) : null}
+                          </TableCell>
+                          <TableCell>{item.submittedAt || '-'}</TableCell>
+                          <TableCell className="min-w-56 text-sm text-slate-600">{item.memo || '-'}</TableCell>
+                          <TableCell>
+                            <StatusBadge status={item.status} evidence />
                           </TableCell>
                         </TableRow>
                       ))}
@@ -208,7 +245,10 @@ export default function OperationsDashboard({ data }: OperationsDashboardProps) 
         <TabsContent value="measurements">
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-semibold text-slate-900">성과측정 항목</h2>
+              <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
+                <LineChart className="h-5 w-5 text-slate-500" />
+                성과측정 항목
+              </h2>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">

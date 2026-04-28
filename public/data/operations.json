@@ -7,12 +7,78 @@
       "required": 6,
       "completed": 0,
       "items": [
-        { "name": "모집 공고 및 신청서", "type": "모집", "due": "2026.04", "status": "not_started", "owner": "프로그램 운영" },
-        { "name": "선정 심사표 및 선정자 명단", "type": "선정", "due": "기수별 0주차", "status": "not_started", "owner": "프로그램 운영" },
-        { "name": "초기상담 기록 및 사전검사", "type": "성과측정", "due": "기수별 1~2주차", "status": "not_started", "owner": "참여자 관리" },
-        { "name": "집단·심층상담 운영일지", "type": "운영", "due": "기수별 3~7주차", "status": "not_started", "owner": "참여자 관리" },
-        { "name": "수료자 명단 및 사후검사", "type": "성과측정", "due": "기수별 8주차", "status": "not_started", "owner": "성과관리" },
-        { "name": "우수 참여자 사례", "type": "성과", "due": "2026.11", "status": "not_started", "owner": "성과관리" }
+        {
+          "name": "모집 공고 및 신청서",
+          "type": "모집",
+          "due": "2026.04",
+          "status": "not_started",
+          "owner": "프로그램 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "선정 심사표 및 선정자 명단",
+          "type": "선정",
+          "due": "기수별 0주차",
+          "status": "not_started",
+          "owner": "프로그램 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "초기상담 기록 및 사전검사",
+          "type": "성과측정",
+          "due": "기수별 1~2주차",
+          "status": "not_started",
+          "owner": "참여자 관리",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "집단·심층상담 운영일지",
+          "type": "운영",
+          "due": "기수별 3~7주차",
+          "status": "not_started",
+          "owner": "참여자 관리",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "수료자 명단 및 사후검사",
+          "type": "성과측정",
+          "due": "기수별 8주차",
+          "status": "not_started",
+          "owner": "성과관리",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "우수 참여자 사례",
+          "type": "성과",
+          "due": "2026.11",
+          "status": "not_started",
+          "owner": "성과관리",
+          "source": "google-drive",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "Google Drive 폴더 또는 파일 링크 입력"
+        }
       ]
     },
     {
@@ -21,13 +87,90 @@
       "required": 7,
       "completed": 0,
       "items": [
-        { "name": "모집 공고 및 신청서", "type": "모집", "due": "2026.04 / 2026.06", "status": "not_started", "owner": "프로그램 운영" },
-        { "name": "심사표 및 20팀 선정 명단", "type": "선정", "due": "기수별 심사 후", "status": "not_started", "owner": "프로그램 운영" },
-        { "name": "협약서 및 개인정보 동의서", "type": "협약", "due": "킥오프", "status": "not_started", "owner": "행정" },
-        { "name": "팀별 활동계획서", "type": "운영", "due": "Step1", "status": "not_started", "owner": "참여자 관리" },
-        { "name": "프로토타입 결과보고서", "type": "성과", "due": "Step2~3", "status": "not_started", "owner": "성과관리" },
-        { "name": "정책제안서", "type": "성과", "due": "2026.11", "status": "not_started", "owner": "성과관리" },
-        { "name": "활동 사진·영상", "type": "증빙", "due": "상시", "status": "not_started", "owner": "참여자 관리" }
+        {
+          "name": "모집 공고 및 신청서",
+          "type": "모집",
+          "due": "2026.04 / 2026.06",
+          "status": "not_started",
+          "owner": "프로그램 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "심사표 및 20팀 선정 명단",
+          "type": "선정",
+          "due": "기수별 심사 후",
+          "status": "not_started",
+          "owner": "프로그램 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "협약서 및 개인정보 동의서",
+          "type": "협약",
+          "due": "킥오프",
+          "status": "not_started",
+          "owner": "행정",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "팀별 활동계획서",
+          "type": "운영",
+          "due": "Step1",
+          "status": "not_started",
+          "owner": "참여자 관리",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "프로토타입 결과보고서",
+          "type": "성과",
+          "due": "Step2~3",
+          "status": "not_started",
+          "owner": "성과관리",
+          "source": "google-drive",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "Google Drive 폴더 또는 파일 링크 입력"
+        },
+        {
+          "name": "정책제안서",
+          "type": "성과",
+          "due": "2026.11",
+          "status": "not_started",
+          "owner": "성과관리",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "활동 사진·영상",
+          "type": "증빙",
+          "due": "상시",
+          "status": "not_started",
+          "owner": "참여자 관리",
+          "source": "google-drive",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "Google Drive 폴더 또는 파일 링크 입력"
+        }
       ]
     },
     {
@@ -36,14 +179,102 @@
       "required": 8,
       "completed": 0,
       "items": [
-        { "name": "모집 공고 및 참여신청서", "type": "모집", "due": "2026.06~07", "status": "not_started", "owner": "프로그램 운영" },
-        { "name": "심사표 및 선정팀 명단", "type": "선정", "due": "2026.07", "status": "not_started", "owner": "프로그램 운영" },
-        { "name": "협약서 및 지급보증보험 확인", "type": "협약", "due": "협약 시", "status": "not_started", "owner": "행정" },
-        { "name": "1차 교부 조건 확인", "type": "지원금", "due": "선정·협약 시", "status": "not_started", "owner": "예산 관리" },
-        { "name": "중간 진행결과 및 2차 교부 심사", "type": "지원금", "due": "Step2", "status": "not_started", "owner": "성과관리" },
-        { "name": "최종 산출물 및 3차 교부 확인", "type": "지원금", "due": "성과확인 후", "status": "not_started", "owner": "성과관리" },
-        { "name": "사업자등록증 및 주소지 유지 확인", "type": "사후점검", "due": "2026.11 / 2027.06", "status": "not_started", "owner": "행정" },
-        { "name": "팀별 회계감사 자료", "type": "정산", "due": "2026.12", "status": "not_started", "owner": "예산 관리" }
+        {
+          "name": "모집 공고 및 참여신청서",
+          "type": "모집",
+          "due": "2026.06~07",
+          "status": "not_started",
+          "owner": "프로그램 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "심사표 및 선정팀 명단",
+          "type": "선정",
+          "due": "2026.07",
+          "status": "not_started",
+          "owner": "프로그램 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "협약서 및 지급보증보험 확인",
+          "type": "협약",
+          "due": "협약 시",
+          "status": "not_started",
+          "owner": "행정",
+          "source": "botem-e",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "보킬e 등록번호 또는 지출증빙 식별값 입력"
+        },
+        {
+          "name": "1차 교부 조건 확인",
+          "type": "지원금",
+          "due": "선정·협약 시",
+          "status": "not_started",
+          "owner": "예산 관리",
+          "source": "botem-e",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "보킬e 등록번호 또는 지출증빙 식별값 입력"
+        },
+        {
+          "name": "중간 진행결과 및 2차 교부 심사",
+          "type": "지원금",
+          "due": "Step2",
+          "status": "not_started",
+          "owner": "성과관리",
+          "source": "botem-e",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "보킬e 등록번호 또는 지출증빙 식별값 입력"
+        },
+        {
+          "name": "최종 산출물 및 3차 교부 확인",
+          "type": "지원금",
+          "due": "성과확인 후",
+          "status": "not_started",
+          "owner": "성과관리",
+          "source": "botem-e",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "보킬e 등록번호 또는 지출증빙 식별값 입력"
+        },
+        {
+          "name": "사업자등록증 및 주소지 유지 확인",
+          "type": "사후점검",
+          "due": "2026.11 / 2027.06",
+          "status": "not_started",
+          "owner": "행정",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "팀별 회계감사 자료",
+          "type": "정산",
+          "due": "2026.12",
+          "status": "not_started",
+          "owner": "예산 관리",
+          "source": "botem-e",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "보킬e 등록번호 또는 지출증빙 식별값 입력"
+        }
       ]
     },
     {
@@ -52,12 +283,78 @@
       "required": 6,
       "completed": 0,
       "items": [
-        { "name": "공인중개사협회 협약서", "type": "협약", "due": "2026.05", "status": "not_started", "owner": "협력 네트워크" },
-        { "name": "블라인드 공인중개사 명단", "type": "협력", "due": "2026.05", "status": "not_started", "owner": "협력 네트워크" },
-        { "name": "상담신청 접수대장", "type": "운영", "due": "2026.05~11", "status": "not_started", "owner": "상담 운영" },
-        { "name": "사전검토·계약검토·법률검토 회신 기록", "type": "운영", "due": "상시", "status": "not_started", "owner": "상담 운영" },
-        { "name": "가이드라인 및 체크리스트 제작물", "type": "산출물", "due": "2026.05", "status": "not_started", "owner": "콘텐츠" },
-        { "name": "찾아가는 부스·강의 운영보고", "type": "성과", "due": "2026.07~11", "status": "not_started", "owner": "성과관리" }
+        {
+          "name": "공인중개사협회 협약서",
+          "type": "협약",
+          "due": "2026.05",
+          "status": "not_started",
+          "owner": "협력 네트워크",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "블라인드 공인중개사 명단",
+          "type": "협력",
+          "due": "2026.05",
+          "status": "not_started",
+          "owner": "협력 네트워크",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "상담신청 접수대장",
+          "type": "운영",
+          "due": "2026.05~11",
+          "status": "not_started",
+          "owner": "상담 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "사전검토·계약검토·법률검토 회신 기록",
+          "type": "운영",
+          "due": "상시",
+          "status": "not_started",
+          "owner": "상담 운영",
+          "source": "internal",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "내부 보관 위치 또는 담당자 메모 입력"
+        },
+        {
+          "name": "가이드라인 및 체크리스트 제작물",
+          "type": "산출물",
+          "due": "2026.05",
+          "status": "not_started",
+          "owner": "콘텐츠",
+          "source": "google-drive",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "Google Drive 폴더 또는 파일 링크 입력"
+        },
+        {
+          "name": "찾아가는 부스·강의 운영보고",
+          "type": "성과",
+          "due": "2026.07~11",
+          "status": "not_started",
+          "owner": "성과관리",
+          "source": "google-drive",
+          "referenceNo": "",
+          "url": "",
+          "submittedAt": "",
+          "memo": "Google Drive 폴더 또는 파일 링크 입력"
+        }
       ]
     }
   ],
@@ -67,8 +364,20 @@
       "label": "[E] 캠퍼스타운 챌린지",
       "totalBudget": 164000,
       "disbursements": [
-        { "stage": "개인 활동지원", "condition": "4개월 활동 참여", "plannedAmount": 64000, "currentAmount": 0, "status": "not_started" },
-        { "stage": "팀 지원금", "condition": "기수별 10팀 선정 및 활동계획 승인", "plannedAmount": 100000, "currentAmount": 0, "status": "not_started" }
+        {
+          "stage": "개인 활동지원",
+          "condition": "4개월 활동 참여",
+          "plannedAmount": 64000,
+          "currentAmount": 0,
+          "status": "not_started"
+        },
+        {
+          "stage": "팀 지원금",
+          "condition": "기수별 10팀 선정 및 활동계획 승인",
+          "plannedAmount": 100000,
+          "currentAmount": 0,
+          "status": "not_started"
+        }
       ]
     },
     {
@@ -76,23 +385,119 @@
       "label": "[S] 둥지 시드머니",
       "totalBudget": 165000,
       "disbursements": [
-        { "stage": "1단계", "condition": "사업계획서 제출 및 협약서 체결", "ratio": 40, "plannedAmount": 66000, "currentAmount": 0, "status": "not_started" },
-        { "stage": "2단계", "condition": "중간 산출물 제출 및 진척도 70% 이상", "ratio": 30, "plannedAmount": 49500, "currentAmount": 0, "status": "not_started" },
-        { "stage": "3단계", "condition": "최종 산출물 완성 및 데모데이 참여", "ratio": 30, "plannedAmount": 49500, "currentAmount": 0, "status": "not_started" }
+        {
+          "stage": "1단계",
+          "condition": "사업계획서 제출 및 협약서 체결",
+          "ratio": 40,
+          "plannedAmount": 66000,
+          "currentAmount": 0,
+          "status": "not_started"
+        },
+        {
+          "stage": "2단계",
+          "condition": "중간 산출물 제출 및 진척도 70% 이상",
+          "ratio": 30,
+          "plannedAmount": 49500,
+          "currentAmount": 0,
+          "status": "not_started"
+        },
+        {
+          "stage": "3단계",
+          "condition": "최종 산출물 완성 및 데모데이 참여",
+          "ratio": 30,
+          "plannedAmount": 49500,
+          "currentAmount": 0,
+          "status": "not_started"
+        }
       ]
     }
   ],
   "measurements": [
-    { "program": "N", "label": "우울·불안 증상 개선율", "tool": "PHQ-9 / GAD-7", "target": "50% 이상 개선", "baseline": 0, "followup": 0, "current": 0, "unit": "%", "status": "not_started" },
-    { "program": "N", "label": "수료율", "tool": "참여율 및 수료자 명단", "target": "70%", "baseline": 0, "followup": 0, "current": 0, "unit": "%", "status": "not_started" },
-    { "program": "common", "label": "사업 만족도", "tool": "참여자 만족도 조사", "target": "85점 이상", "baseline": 0, "followup": 0, "current": 0, "unit": "점", "status": "not_started" },
-    { "program": "common", "label": "청년친화도시 인지도", "tool": "사전·사후 설문", "target": "20% 상승", "baseline": 0, "followup": 0, "current": 0, "unit": "%", "status": "not_started" }
+    {
+      "program": "N",
+      "label": "우울·불안 증상 개선율",
+      "tool": "PHQ-9 / GAD-7",
+      "target": "50% 이상 개선",
+      "baseline": 0,
+      "followup": 0,
+      "current": 0,
+      "unit": "%",
+      "status": "not_started"
+    },
+    {
+      "program": "N",
+      "label": "수료율",
+      "tool": "참여율 및 수료자 명단",
+      "target": "70%",
+      "baseline": 0,
+      "followup": 0,
+      "current": 0,
+      "unit": "%",
+      "status": "not_started"
+    },
+    {
+      "program": "common",
+      "label": "사업 만족도",
+      "tool": "참여자 만족도 조사",
+      "target": "85점 이상",
+      "baseline": 0,
+      "followup": 0,
+      "current": 0,
+      "unit": "점",
+      "status": "not_started"
+    },
+    {
+      "program": "common",
+      "label": "청년친화도시 인지도",
+      "tool": "사전·사후 설문",
+      "target": "20% 상승",
+      "baseline": 0,
+      "followup": 0,
+      "current": 0,
+      "unit": "%",
+      "status": "not_started"
+    }
   ],
   "casePipeline": [
-    { "program": "T", "label": "사전검토", "target": 150, "current": 0, "unit": "건", "status": "not_started" },
-    { "program": "T", "label": "계약검토", "target": 10, "current": 0, "unit": "건", "status": "not_started" },
-    { "program": "T", "label": "법률검토", "target": 5, "current": 0, "unit": "건", "status": "not_started" },
-    { "program": "T", "label": "찾아가는 부스", "target": 2, "current": 0, "unit": "회", "status": "not_started" },
-    { "program": "T", "label": "찾아가는 강의", "target": 2, "current": 0, "unit": "회", "status": "not_started" }
+    {
+      "program": "T",
+      "label": "사전검토",
+      "target": 150,
+      "current": 0,
+      "unit": "건",
+      "status": "not_started"
+    },
+    {
+      "program": "T",
+      "label": "계약검토",
+      "target": 10,
+      "current": 0,
+      "unit": "건",
+      "status": "not_started"
+    },
+    {
+      "program": "T",
+      "label": "법률검토",
+      "target": 5,
+      "current": 0,
+      "unit": "건",
+      "status": "not_started"
+    },
+    {
+      "program": "T",
+      "label": "찾아가는 부스",
+      "target": 2,
+      "current": 0,
+      "unit": "회",
+      "status": "not_started"
+    },
+    {
+      "program": "T",
+      "label": "찾아가는 강의",
+      "target": 2,
+      "current": 0,
+      "unit": "회",
+      "status": "not_started"
+    }
   ]
 }

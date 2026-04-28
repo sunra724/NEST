@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { appendChangelog, readJSON, verifyAdmin, writeJSON } from '@/lib/data-writer';
-import type { OperationStatus, OperationsData } from '@/types';
+import type { EvidenceSource, OperationStatus, OperationsData } from '@/types';
 
 export const runtime = 'nodejs';
 
 const ALLOWED_STATUS: OperationStatus[] = ['not_started', 'in_progress', 'completed', 'risk'];
+const ALLOWED_SOURCE: EvidenceSource[] = ['botem-e', 'google-drive', 'internal', 'other'];
 
 function todayInSeoul() {
   return new Intl.DateTimeFormat('en-CA', {
@@ -17,6 +18,10 @@ function todayInSeoul() {
 
 function isStatus(value: unknown): value is OperationStatus {
   return typeof value === 'string' && ALLOWED_STATUS.includes(value as OperationStatus);
+}
+
+function isSource(value: unknown): value is EvidenceSource {
+  return typeof value === 'string' && ALLOWED_SOURCE.includes(value as EvidenceSource);
 }
 
 export async function PATCH(request: NextRequest) {
@@ -32,8 +37,17 @@ export async function PATCH(request: NextRequest) {
   const data = await readJSON<OperationsData>('operations.json');
 
   if (body.type === 'evidence') {
-    const { program, name, status } = body;
-    if (typeof program !== 'string' || typeof name !== 'string' || !isStatus(status)) {
+    const { program, name, status, source, referenceNo, url, submittedAt, memo } = body;
+    if (
+      typeof program !== 'string' ||
+      typeof name !== 'string' ||
+      !isStatus(status) ||
+      !isSource(source) ||
+      typeof referenceNo !== 'string' ||
+      typeof url !== 'string' ||
+      typeof submittedAt !== 'string' ||
+      typeof memo !== 'string'
+    ) {
       return NextResponse.json({ error: '잘못된 증빙 요청' }, { status: 400 });
     }
 
@@ -45,6 +59,11 @@ export async function PATCH(request: NextRequest) {
 
     const prev = item.status;
     item.status = status;
+    item.source = source;
+    item.referenceNo = referenceNo.trim();
+    item.url = url.trim();
+    item.submittedAt = submittedAt.trim();
+    item.memo = memo.trim();
     group.completed = group.items.filter((entry) => entry.status === 'completed').length;
     data.lastUpdated = todayInSeoul();
 
@@ -52,7 +71,7 @@ export async function PATCH(request: NextRequest) {
     await appendChangelog({
       action: 'OPERATIONS_EVIDENCE_UPDATE',
       target: `운영관리 / ${program} / ${name}`,
-      summary: `증빙 상태: ${prev} -> ${status}`,
+      summary: `증빙 상태: ${prev} -> ${status}, 출처 ${source}, 관리번호 ${item.referenceNo || '-'}`,
     });
 
     return NextResponse.json({ ok: true, data });
