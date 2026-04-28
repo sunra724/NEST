@@ -1,0 +1,59 @@
+{
+  "projectName": "청년 N.E.S.T.",
+  "subtitle": "청년친화적 도시 조성 사업",
+  "organization": "대구광역시 남구",
+  "operator": "협동조합 소이랩",
+  "supervisor": "남구청 인구총괄과",
+  "period": { "start": "2026-01", "end": "2026-12" },
+  "totalBudget": 650000,
+  "totalBeneficiaries": 380,
+  "nestMeaning": {
+    "N": { "en": "Networking", "ko": "관계 형성" },
+    "E": { "en": "Empowerment", "ko": "역량 강화" },
+    "S": { "en": "Startup", "ko": "자립 기반" },
+    "T": { "en": "Trust", "ko": "정주 안전망" }
+  },
+  "programs": [
+    {
+      "id": "N",
+      "name": "마음충전소",
+      "tagline": "고립·은둔 청년 지원",
+      "budget": 50000,
+      "budgetRatio": 7.7,
+      "target": "만 19~34세 고립·은둔 청년",
+      "scale": "상담 100명 (4기수, 기수당 25명)",
+      "period": "2026.04 ~ 11"
+    },
+    {
+      "id": "E",
+      "name": "캠퍼스타운 챌린지",
+      "tagline": "지역문제해결 리빙랩",
+      "budget": 300000,
+      "budgetRatio": 46.2,
+      "target": "남구 4개 대학 재·휴학생 및 남구 거주 청년",
+      "scale": "80명 / 20팀 (2기수, 기수당 10팀)",
+      "period": "2026.04 ~ 11"
+    },
+    {
+      "id": "S",
+      "name": "둥지 시드머니",
+      "tagline": "초기 창업·사업화 지원",
+      "budget": 280000,
+      "budgetRatio": 43.1,
+      "target": "남구 기반 7년 미만 초기 창업팀",
+      "scale": "18팀 (트랙1 콘텐츠 10팀, 트랙2 로컬창업 8팀)",
+      "period": "2026.04 ~ 11"
+    },
+    {
+      "id": "T",
+      "name": "안심전월세 지킴이",
+      "tagline": "주거 안전망 구축",
+      "budget": 20000,
+      "budgetRatio": 3.1,
+      "target": "만 19~39세 청년 (1인가구/신혼부부)",
+      "scale": "상담 200건, 계약동행 50건",
+      "period": "2026.04 ~ 12"
+    }
+  ],
+  "lastUpdated": "2026-02-25"
+}

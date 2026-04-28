@@ -1,0 +1,25 @@
+{
+  "id": "T",
+  "name": "안심전월세 지킴이",
+  "purpose": "청년 전세 사기 피해 예방·불공정 계약 방지로 '믿고 살 수 있는' 정주 환경 조성",
+  "stages": [
+    { "name": "상담채널 구축", "duration": "주 2회", "activities": ["온·오프라인 상담창구 운영"] },
+    { "name": "사전검토", "duration": "예약제", "activities": ["등기부등본", "전세가율 확인", "임대인 신원"] },
+    { "name": "계약동행", "duration": "월 예약제", "activities": ["협력 중개사 30개소 연계"] },
+    { "name": "교육·캠페인", "duration": "격월/분기", "activities": ["분쟁예방 교육", "축제 연계 부스"] }
+  ],
+  "partnerBrokers": 30,
+  "additionalServices": [
+    { "name": "찾아가는 상담소", "cycle": "격월", "desc": "현장 방문 상담" },
+    { "name": "축제 연계 부스", "cycle": "비정기", "desc": "지역 행사 연계 홍보" },
+    { "name": "분쟁예방 교육", "cycle": "분기", "desc": "임대차 분쟁 예방 강의" },
+    { "name": "법률 상담", "cycle": "격월", "desc": "무료 법률 자문" },
+    { "name": "계약동행 서비스", "cycle": "월 예약", "desc": "계약 현장 동행" }
+  ],
+  "contents": ["임대차 체크리스트", "위험신호 리스트", "특약 샘플 10종", "카드뉴스", "리플릿"],
+  "partners": ["공인중개사협회 남구지회", "HUG(주택도시보증공사)", "법률NPO"],
+  "connections": [
+    { "target": "[N][E][S]", "desc": "전 프로그램 참여자 정착 지원 최종단계" }
+  ],
+  "participants": []
+}

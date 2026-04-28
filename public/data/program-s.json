@@ -1,0 +1,35 @@
+{
+  "id": "S",
+  "name": "둥지 시드머니",
+  "purpose": "발굴된 아이디어·예비 창업팀에 시드머니 지원하여 지역 내 경제적 자립 기반 마련",
+  "tracks": {
+    "track1": {
+      "label": "콘텐츠",
+      "teams": 10,
+      "budgetPerTeam": 8500,
+      "period": "4~9월",
+      "focus": "공연·전시·영상 창작, 대명공연거리 활용"
+    },
+    "track2": {
+      "label": "로컬창업",
+      "teams": 8,
+      "budgetPerTeam": 10000,
+      "period": "7~11월",
+      "focus": "지역자원 기반 제품·서비스, 전통시장 연계"
+    }
+  },
+  "stages": [
+    { "name": "기획착수", "duration": "4주" },
+    { "name": "제작개발", "duration": "8주" },
+    { "name": "시장검증", "duration": "8주" },
+    { "name": "성과확산", "duration": "4~8주" }
+  ],
+  "fundingSchedule": [40, 30, 30],
+  "localResources": ["대명공연거리", "앞산·겨울스토리", "전통시장·상권", "대학가", "남구청년센터"],
+  "partners": ["대명공연거리 상인회", "전통시장 협의체", "대구창조경제혁신센터"],
+  "connections": [
+    { "target": "[E]", "desc": "우수팀 유입" },
+    { "target": "[T]", "desc": "사업화 후 공간 확보" }
+  ],
+  "participants": []
+}

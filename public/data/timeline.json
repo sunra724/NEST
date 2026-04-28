@@ -1,0 +1,72 @@
+{
+  "categories": [
+    {
+      "id": "common",
+      "label": "공통",
+      "color": "#6366F1",
+      "tasks": [
+        { "name": "계획 수립 및 협약", "months": [1, 2], "status": "completed" },
+        { "name": "추경 및 예산 확정", "months": [3], "status": "pending" },
+        { "name": "보조금 교부 및 착수", "months": [4], "status": "pending" },
+        { "name": "중간 점검", "months": [5, 6, 7, 9, 10], "status": "pending" },
+        { "name": "통합 성과공유회", "months": [11], "status": "pending" },
+        { "name": "정산 및 최종보고", "months": [12], "status": "pending" }
+      ]
+    },
+    {
+      "id": "N",
+      "label": "[N] 마음충전소",
+      "color": "#3B82F6",
+      "tasks": [
+        { "name": "운영 준비 및 홍보", "months": [2, 3, 4], "status": "in_progress" },
+        { "name": "상담 프로그램 운영", "months": [4, 5, 6, 7, 8, 9, 10, 11], "status": "pending" },
+        { "name": "네트워크 프로그램", "months": [5, 6, 7, 8, 9, 10, 11], "status": "pending" }
+      ]
+    },
+    {
+      "id": "E",
+      "label": "[E] 캠퍼스타운 챌린지",
+      "color": "#10B981",
+      "tasks": [
+        { "name": "1기 모집 및 선발", "months": [4, 5], "status": "pending" },
+        { "name": "1기 킥오프", "months": [5], "status": "pending" },
+        { "name": "1기 리빙랩 활동", "months": [5, 6, 7], "status": "pending" },
+        { "name": "1기 마무리", "months": [7], "status": "pending" },
+        { "name": "2기 모집 및 선발", "months": [6, 7], "status": "pending" },
+        { "name": "2기 킥오프", "months": [7], "status": "pending" },
+        { "name": "2기 리빙랩 활동", "months": [8, 9, 10], "status": "pending" },
+        { "name": "2기 마무리", "months": [10], "status": "pending" },
+        { "name": "통합 성과공유회", "months": [11], "status": "pending" }
+      ]
+    },
+    {
+      "id": "S",
+      "label": "[S] 둥지 시드머니",
+      "color": "#F59E0B",
+      "tasks": [
+        { "name": "트랙1 공모 및 선발", "months": [4, 5], "status": "pending" },
+        { "name": "트랙1 협약 및 착수", "months": [5], "status": "pending" },
+        { "name": "트랙1 사업화", "months": [6, 7, 8], "status": "pending" },
+        { "name": "트랙1 중간점검", "months": [7], "status": "pending" },
+        { "name": "트랙1 마무리", "months": [9], "status": "pending" },
+        { "name": "트랙2 공모 및 선발", "months": [7, 8], "status": "pending" },
+        { "name": "트랙2 협약 및 착수", "months": [8], "status": "pending" },
+        { "name": "트랙2 사업화", "months": [9, 10, 11], "status": "pending" },
+        { "name": "트랙2 중간점검", "months": [10], "status": "pending" },
+        { "name": "트랙2 마무리", "months": [11], "status": "pending" },
+        { "name": "쇼케이스 및 데모데이", "months": [11], "status": "pending" }
+      ]
+    },
+    {
+      "id": "T",
+      "label": "[T] 안심전월세 지킴이",
+      "color": "#EF4444",
+      "tasks": [
+        { "name": "운영 준비 및 홍보", "months": [2, 3, 4], "status": "in_progress" },
+        { "name": "상담창구 운영", "months": [4, 5, 6, 7, 8, 9, 10, 11], "status": "pending" },
+        { "name": "계약동행 서비스", "months": [4, 5, 6, 7, 8, 9, 10, 11], "status": "pending" },
+        { "name": "분쟁예방 교육", "months": [5, 7, 9, 11], "status": "pending" }
+      ]
+    }
+  ]
+}

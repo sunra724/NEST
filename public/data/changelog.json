@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "action": "KPI_UPDATE",
+      "target": "N / N-2",
+      "summary": "네트워크 참여율: 0 → 40 %",
+      "timestamp": "2026-02-25T06:20:27.468Z"
+    },
+    {
+      "action": "KPI_UPDATE",
+      "target": "N / N-1",
+      "summary": "상담 참여자 수: 0 → 10 명",
+      "timestamp": "2026-02-25T06:20:27.225Z"
+    }
+  ]
+}

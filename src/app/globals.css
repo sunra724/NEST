@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+@media print {
+  nav,
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+
+  .report-body {
+    margin: 0;
+    max-width: 210mm;
+    padding: 15mm;
+    box-shadow: none;
+    font-size: 10pt;
+  }
+
+  h1,
+  h2 {
+    font-size: 14pt;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+}

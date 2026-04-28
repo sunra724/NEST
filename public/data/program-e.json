@@ -1,0 +1,28 @@
+{
+  "id": "E",
+  "name": "캠퍼스타운 챌린지",
+  "purpose": "남구 4개 대학 청년이 지역 문제를 직접 발굴·해결하여 '남구의 주인'으로 성장, 지역 애착도 고취",
+  "cohorts": [
+    { "label": "1기", "period": "2026.04~07", "capacity": 40, "status": "예정" },
+    { "label": "2기", "period": "2026.06~09", "capacity": 40, "status": "예정" }
+  ],
+  "stages": [
+    { "name": "발견", "duration": "4주", "activities": ["지역문제 발굴", "현장조사"] },
+    { "name": "실험", "duration": "8주", "activities": ["프로토타입 제작", "실증"] },
+    { "name": "연결", "duration": "4주", "activities": ["정책제안", "협력기관 연계"] },
+    { "name": "확산", "duration": "11월~", "activities": ["성과공유회", "지속 활동"] }
+  ],
+  "funding": {
+    "stage1": 3000,
+    "stage2Max": 5000,
+    "totalMax": 8000,
+    "unit": "천원/팀"
+  },
+  "foreignStudentTarget": "10% 참여 권장",
+  "partners": ["계명대", "대구교대", "대구대", "영남이공대", "대구상공회의소"],
+  "connections": [
+    { "target": "[S]", "desc": "우수팀 트랙2 우선 선발" },
+    { "target": "[T]", "desc": "남구 외 거주 참여자 정착 지원" }
+  ],
+  "participants": []
+}

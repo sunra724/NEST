@@ -1,0 +1,49 @@
+{
+  "totalBudget": 650000,
+  "byCategory": {
+    "directCost": { "budget": 476500, "spent": 0, "ratio": 73.3 },
+    "indirectCost": { "budget": 34500, "spent": 0, "ratio": 5.3 },
+    "laborCost": { "budget": 139000, "spent": 0, "ratio": 21.4 }
+  },
+  "byProgram": [
+    { "id": "N", "name": "마음충전소", "budget": 50000, "spent": 0, "direct": 32000, "indirect": 3000, "labor": 15000 },
+    { "id": "E", "name": "캠퍼스타운 챌린지", "budget": 300000, "spent": 0, "direct": 220000, "indirect": 15000, "labor": 65000 },
+    { "id": "S", "name": "둥지 시드머니", "budget": 280000, "spent": 0, "direct": 210000, "indirect": 15000, "labor": 55000 },
+    { "id": "T", "name": "안심전월세 지킴이", "budget": 20000, "spent": 0, "direct": 14500, "indirect": 1500, "labor": 4000 }
+  ],
+  "directCostDetail": {
+    "teamSupport": { "budget": 325000, "spent": 0, "label": "팀 지원비" },
+    "operation": { "budget": 42200, "spent": 0, "label": "운영비" },
+    "expertise": { "budget": 85900, "spent": 0, "label": "전문가 인건비" },
+    "printing": { "budget": 23400, "spent": 0, "label": "인쇄비" }
+  },
+  "monthlyExecution": [
+    { "month": "2026-01", "planned": 0, "actual": 0 },
+    { "month": "2026-02", "planned": 0, "actual": 0 },
+    { "month": "2026-03", "planned": 50000, "actual": 0 },
+    { "month": "2026-04", "planned": 80000, "actual": 0 },
+    { "month": "2026-05", "planned": 70000, "actual": 0 },
+    { "month": "2026-06", "planned": 80000, "actual": 0 },
+    { "month": "2026-07", "planned": 90000, "actual": 0 },
+    { "month": "2026-08", "planned": 70000, "actual": 0 },
+    { "month": "2026-09", "planned": 60000, "actual": 0 },
+    { "month": "2026-10", "planned": 50000, "actual": 0 },
+    { "month": "2026-11", "planned": 60000, "actual": 0 },
+    { "month": "2026-12", "planned": 40000, "actual": 0 }
+  ],
+  "laborDetail": {
+    "total": 139000,
+    "pmSalary": 67200,
+    "managerSalary": 52440,
+    "overhead": 19360,
+    "staff": [
+      { "name": "강아름", "title": "대표", "program": "공통/[S]", "role": "총괄/PM" },
+      { "name": "김형준", "title": "연구소장", "program": "공통/[E]", "role": "전담/PM" },
+      { "name": "이형구", "title": "경영실장", "program": "[S]/[T]", "role": "관리자" },
+      { "name": "박기범", "title": "팀장", "program": "[N]", "role": "담당PM", "rate": "55%" },
+      { "name": "신규A", "title": "팀장급", "program": "[E]", "role": "관리자", "rate": "90%" },
+      { "name": "신규B", "title": "연구원급", "program": "[E]/[S]", "role": "실무보조", "rate": "60%/40%" }
+    ]
+  },
+  "lastUpdated": "2026-02-25"
+}

@@ -1,0 +1,215 @@
+{
+  "programs": {
+    "N": {
+      "name": "마음충전소",
+      "kpis": [
+        {
+          "id": "N-1",
+          "label": "상담 참여자 수",
+          "target": 100,
+          "current": 10,
+          "unit": "명"
+        },
+        {
+          "id": "N-2",
+          "label": "네트워크 참여율",
+          "target": 60,
+          "current": 40,
+          "unit": "%"
+        },
+        {
+          "id": "N-3",
+          "label": "또래멘토 양성",
+          "target": 20,
+          "current": 0,
+          "unit": "명"
+        },
+        {
+          "id": "N-4",
+          "label": "프로그램 이수율",
+          "target": 70,
+          "current": 0,
+          "unit": "%"
+        },
+        {
+          "id": "N-5",
+          "label": "사회적 고립감 개선도",
+          "target": 30,
+          "current": 0,
+          "unit": "% 감소"
+        },
+        {
+          "id": "N-6",
+          "label": "우울·불안 증상 개선율",
+          "target": 25,
+          "current": 0,
+          "unit": "% 개선"
+        }
+      ]
+    },
+    "E": {
+      "name": "캠퍼스타운 챌린지",
+      "kpis": [
+        {
+          "id": "E-1",
+          "label": "프로그램 참여자 수",
+          "target": 80,
+          "current": 0,
+          "unit": "명(20팀)"
+        },
+        {
+          "id": "E-2",
+          "label": "프로토타입 실증",
+          "target": 10,
+          "current": 0,
+          "unit": "건"
+        },
+        {
+          "id": "E-3",
+          "label": "정책제안",
+          "target": 10,
+          "current": 0,
+          "unit": "건(채택 5건)"
+        },
+        {
+          "id": "E-4",
+          "label": "정착률",
+          "target": 30,
+          "current": 0,
+          "unit": "%(6팀)"
+        }
+      ]
+    },
+    "S": {
+      "name": "둥지 시드머니",
+      "kpis": [
+        {
+          "id": "S-1",
+          "label": "지원팀 수",
+          "target": 18,
+          "current": 0,
+          "unit": "팀"
+        },
+        {
+          "id": "S-2",
+          "label": "사업 생존율",
+          "target": 50,
+          "current": 0,
+          "unit": "%(9팀)"
+        },
+        {
+          "id": "S-3",
+          "label": "신규 고용 창출",
+          "target": 15,
+          "current": 0,
+          "unit": "명"
+        },
+        {
+          "id": "S-4",
+          "label": "사업자등록",
+          "target": 15,
+          "current": 0,
+          "unit": "건"
+        },
+        {
+          "id": "S-5",
+          "label": "참여자 정착률",
+          "target": 60,
+          "current": 0,
+          "unit": "%"
+        },
+        {
+          "id": "S-6",
+          "label": "시제품·콘텐츠 개발",
+          "target": 18,
+          "current": 0,
+          "unit": "건"
+        }
+      ]
+    },
+    "T": {
+      "name": "안심전월세 지킴이",
+      "kpis": [
+        {
+          "id": "T-1",
+          "label": "전월세 상담",
+          "target": 200,
+          "current": 0,
+          "unit": "건"
+        },
+        {
+          "id": "T-2",
+          "label": "계약 사전검토",
+          "target": 160,
+          "current": 0,
+          "unit": "건(80%)"
+        },
+        {
+          "id": "T-3",
+          "label": "계약동행 서비스",
+          "target": 50,
+          "current": 0,
+          "unit": "건"
+        },
+        {
+          "id": "T-4",
+          "label": "분쟁예방 교육",
+          "target": 3,
+          "current": 0,
+          "unit": "회"
+        },
+        {
+          "id": "T-5",
+          "label": "표준문서 활용",
+          "target": 500,
+          "current": 0,
+          "unit": "부"
+        },
+        {
+          "id": "T-6",
+          "label": "위험계약 차단율",
+          "target": 80,
+          "current": 0,
+          "unit": "%"
+        }
+      ]
+    }
+  },
+  "common": {
+    "kpis": [
+      {
+        "id": "C-1",
+        "label": "사업 만족도",
+        "target": 85,
+        "current": 0,
+        "unit": "점"
+      },
+      {
+        "id": "C-2",
+        "label": "브랜드 인지도 상승",
+        "target": 20,
+        "current": 0,
+        "unit": "%"
+      }
+    ]
+  },
+  "aggregate": {
+    "totalBeneficiaries": {
+      "target": 380,
+      "current": 0
+    },
+    "newEmployment": {
+      "target": 15,
+      "current": 0
+    },
+    "policyProposals": {
+      "target": 5,
+      "current": 0
+    },
+    "damagePreventionAmount": {
+      "target": 500000,
+      "current": 0,
+      "unit": "천원"
+    }
+  }
+}
