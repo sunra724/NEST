@@ -21,6 +21,19 @@ function formatEventTime(event: CalendarEventItem) {
   return `${formatter.format(start)} - ${formatter.format(end)}`;
 }
 
+function formatScheduleBasisDate(value: string) {
+  const date = new Date(value);
+  const targetDate = Number.isNaN(date.getTime()) ? new Date() : date;
+
+  return new Intl.DateTimeFormat('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    weekday: 'short',
+  }).format(targetDate);
+}
+
 function EventRow({ event }: { event: CalendarEventItem }) {
   return (
     <li className="rounded-lg border border-slate-200 px-3 py-3">
@@ -71,6 +84,8 @@ function ScheduleColumn({ section }: { section: CalendarScheduleSection }) {
 }
 
 export default function GoogleCalendarSchedule({ schedule }: GoogleCalendarScheduleProps) {
+  const basisDateLabel = formatScheduleBasisDate(schedule.loadedAt);
+
   return (
     <section className="rounded-xl bg-white p-6 shadow-sm">
       <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
@@ -80,7 +95,7 @@ export default function GoogleCalendarSchedule({ schedule }: GoogleCalendarSched
         </div>
         <div className="flex items-center gap-2 text-xs text-slate-500">
           <CalendarClock className="h-4 w-4" />
-          <span>Google Calendar 일정_NEST 기준</span>
+          <span>{basisDateLabel} 기준 / Google Calendar 일정_NEST</span>
         </div>
       </div>
 
