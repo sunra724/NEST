@@ -24,7 +24,7 @@ export default function LoginPage() {
       });
 
       if (res.ok) {
-        window.location.assign('/');
+        window.location.replace('/');
       } else {
         const data = await res.json().catch(() => null);
         setError(data.error ?? '로그인 실패');
@@ -47,11 +47,12 @@ export default function LoginPage() {
           <p className="text-center text-sm text-slate-500">소이랩 N.E.S.T 사업 성과관리 대시보드</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form action="/api/auth" method="post" onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-1.5">
             <Label htmlFor="password">열람 비밀번호</Label>
             <Input
               id="password"
+              name="password"
               type="password"
               placeholder="비밀번호 입력"
               value={password}

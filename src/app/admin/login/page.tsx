@@ -25,7 +25,7 @@ export default function AdminLoginPage() {
       });
 
       if (res.ok) {
-        window.location.assign('/admin');
+        window.location.replace('/admin');
       } else {
         const data = await res.json().catch(() => null);
         setError(data.error ?? '로그인 실패');
@@ -48,11 +48,12 @@ export default function AdminLoginPage() {
           <p className="text-center text-sm text-slate-500">데이터 입력과 수정 권한이 필요합니다</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form action="/api/admin/auth" method="post" onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-1.5">
             <Label htmlFor="admin-password">관리자 비밀번호</Label>
             <Input
               id="admin-password"
+              name="password"
               type="password"
               placeholder="비밀번호 입력"
               value={password}
