@@ -56,7 +56,7 @@
 | --- | --- | --- |
 | KPI 실적 | `/admin/kpi` | 구축됨 |
 | 예산 집행 | `/admin/budget` | 구축됨 |
-| 예산서 상세 입력 | `/admin/budget-detail` | 남구청 제출 예산서 품목별 실집행액, 품의 상태, 보탬e 메모 입력 구축 |
+| 예산서 상세 입력 | `/admin/budget-detail` | 남구청 제출 예산서 품목별 실집행액, 품의 상태, 보탬e 메모 입력 및 Google Sheet 동기화 패널 구축 |
 | 운영관리 | `/admin/operations` | 증빙 출처/위치, 지원금 교부, 성과측정, 상담 케이스 입력 구축 |
 | 월간 운영보고 | `/admin/monthly-report` | 월별 주요 성과, 이슈, 다음 달 계획, 지원 필요사항 입력 구축 |
 | 일정 상태 | `/admin/timeline` | 구축됨 |
@@ -115,7 +115,7 @@
 2. 관리자 저장 기능을 실제 업무 데이터로 재점검
 3. 증빙 원본 파일이 필요한 항목의 Drive 폴더 체계 정리
 4. 정산보고용 출력 화면 보강
-5. Google Sheets 예산서 연동 방식 확정
+5. Google Sheet `대시보드_입력` 탭 생성 및 서비스 계정 권한 연결
 6. 운영 비밀번호와 관리자 권한 관리 기준 확정
 7. Supabase 데이터 백업 절차 정리
 
@@ -180,3 +180,12 @@
 - `/admin/budget-detail` 화면을 추가하여 품목별 실집행액, 품의상태, 보탬e 메모를 입력
 - 품목별 실집행액 저장 시 프로그램별·비목별 집행액을 다시 계산하도록 구성
 - 향후 Google Sheets 연동 시에는 이 예산 상세 품목 구조를 기준 데이터로 삼고, 담당자가 입력한 실집행액/품의상태/메모를 동기화하는 방향으로 확장
+
+## 2026-04-30 Google Sheet 동기화 구축
+
+- 담당자 입력용 Google Sheet ID를 `1MBs3E6adF_wK5qlr092eB6l7jfLLLItNFMkwrHkzGWg`로 정리
+- `/api/admin/budget-sheet-sync` API를 추가하여 Google Sheet의 `대시보드_입력` 탭을 미리보기/반영할 수 있게 구성
+- `/admin/budget-detail`에 Google Sheet 동기화 패널을 추가
+- `/api/admin/budget-sheet-template` API를 추가하여 `대시보드_입력` 탭에 붙여넣을 CSV 양식을 내려받을 수 있게 구성
+- 동기화 대상 열은 `id`, `실집행액`, `품의상태`, `보탬e 메모`
+- 현재 시트는 서버의 공개 CSV 접근이 401로 차단되므로, 운영 반영 전 링크 공개 또는 Google 서비스 계정 공유가 필요

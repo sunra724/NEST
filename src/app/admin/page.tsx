@@ -16,6 +16,7 @@ const ACTION_LABELS: Record<string, { label: string; color: string }> = {
   BUDGET_PROGRAM_UPDATE: { label: '예산', color: 'bg-amber-100 text-amber-700' },
   BUDGET_MONTHLY_UPDATE: { label: '월별예산', color: 'bg-orange-100 text-orange-700' },
   BUDGET_DETAIL_UPDATE: { label: '예산상세', color: 'bg-purple-100 text-purple-700' },
+  BUDGET_SHEET_SYNC: { label: '시트동기화', color: 'bg-cyan-100 text-cyan-700' },
   TIMELINE_UPDATE: { label: '일정', color: 'bg-green-100 text-green-700' },
   PARTICIPANT_ADD: { label: '참여자+', color: 'bg-indigo-100 text-indigo-700' },
   PARTICIPANT_DELETE: { label: '참여자-', color: 'bg-red-100 text-red-700' },

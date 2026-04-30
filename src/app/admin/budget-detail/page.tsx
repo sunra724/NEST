@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import BudgetDetailEditor from '@/components/admin/BudgetDetailEditor';
+import BudgetSheetSyncPanel from '@/components/admin/BudgetSheetSyncPanel';
 import type { BudgetData } from '@/types';
 
 export default function AdminBudgetDetailPage() {
@@ -38,6 +39,7 @@ export default function AdminBudgetDetailPage() {
         <p className="mt-1 text-sm text-slate-500">남구청 제출 예산서 항목별 실집행액, 품의상태, 보탬e 메모를 입력합니다.</p>
       </div>
 
+      <BudgetSheetSyncPanel onSynced={reload} />
       <BudgetDetailEditor data={data} onSaved={reload} />
     </div>
   );
