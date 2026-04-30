@@ -42,21 +42,25 @@ interface Props {
 export default function BudgetSheetSyncPanel({ onSynced }: Props) {
   const [preview, setPreview] = useState<PreviewData | null>(null);
   const [error, setError] = useState('');
+  const [statusMessage, setStatusMessage] = useState('아직 미리보기를 실행하지 않았습니다.');
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
 
   async function loadPreview() {
     setLoading(true);
     setError('');
+    setStatusMessage('Google Sheet를 읽는 중입니다...');
     try {
       const res = await fetch('/api/admin/budget-sheet-sync', { cache: 'no-store' });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? '스프레드시트를 읽지 못했습니다');
       setPreview(data);
+      setStatusMessage(`미리보기 완료: 변경 예정 ${formatNumber(data.changes?.length ?? 0)}개`);
       toast.success('스프레드시트 변경사항을 확인했습니다');
     } catch (err) {
       const message = err instanceof Error ? err.message : '스프레드시트 확인에 실패했습니다';
       setError(message);
+      setStatusMessage('미리보기에 실패했습니다. 아래 안내를 확인해 주세요.');
       setPreview(null);
     } finally {
       setLoading(false);
@@ -66,16 +70,19 @@ export default function BudgetSheetSyncPanel({ onSynced }: Props) {
   async function syncSheet() {
     setSyncing(true);
     setError('');
+    setStatusMessage('Google Sheet 내용을 대시보드에 반영하는 중입니다...');
     try {
       const res = await fetch('/api/admin/budget-sheet-sync', { method: 'POST' });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? '스프레드시트 반영에 실패했습니다');
       setPreview(data);
+      setStatusMessage(`반영 완료: ${formatNumber(data.applied ?? 0)}개 항목`);
       toast.success(`${formatNumber(data.applied ?? 0)}개 항목을 반영했습니다`);
       onSynced();
     } catch (err) {
       const message = err instanceof Error ? err.message : '스프레드시트 반영에 실패했습니다';
       setError(message);
+      setStatusMessage('반영에 실패했습니다. 아래 안내를 확인해 주세요.');
     } finally {
       setSyncing(false);
     }
@@ -100,19 +107,29 @@ export default function BudgetSheetSyncPanel({ onSynced }: Props) {
           </a>
           <Button variant="outline" onClick={loadPreview} disabled={loading || syncing}>
             <RefreshCw className={`mr-2 h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-            미리보기
+            {loading ? '확인 중...' : '미리보기'}
           </Button>
-          <Button onClick={syncSheet} disabled={syncing || loading}>
+          <Button onClick={syncSheet} disabled={syncing || loading || !preview}>
             <CheckCircle2 className="mr-2 h-4 w-4" />
-            반영
+            {syncing ? '반영 중...' : '반영'}
           </Button>
         </div>
       </div>
 
+      <div className={`mt-4 rounded-lg px-3 py-2 text-sm ${error ? 'bg-amber-50 text-amber-800' : 'bg-slate-50 text-slate-600'}`}>
+        {statusMessage}
+      </div>
+
       {error ? (
-        <div className="mt-4 flex gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+        <div className="mt-3 flex gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-          <p>{error}</p>
+          <div className="space-y-1">
+            <p>{error}</p>
+            <p className="text-xs">
+              현재 `대시보드_입력` 탭은 확인되지만 서버가 시트를 읽을 권한이 없습니다. 시트 오른쪽 위 공유에서 링크 권한을 보기 가능으로 바꾸거나,
+              서비스 계정 이메일을 시트에 공유한 뒤 환경변수를 설정해야 합니다.
+            </p>
+          </div>
         </div>
       ) : null}
 

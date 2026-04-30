@@ -216,7 +216,9 @@ async function fetchPublicCsvValues(spreadsheetId: string, sheetName: string) {
   const response = await fetch(url, { cache: 'no-store' });
 
   if (!response.ok) {
-    throw new Error('Google Sheet를 서버에서 읽을 수 없습니다. 시트를 링크 공개로 바꾸거나 Google 서비스 계정 환경변수를 설정하세요.');
+    throw new Error(
+      `Google Sheet '${sheetName}' 탭을 서버에서 읽을 수 없습니다. 시트 공유를 '링크가 있는 모든 사용자 보기 가능'으로 바꾸거나 Google 서비스 계정 환경변수를 설정해야 합니다.`,
+    );
   }
 
   return parseCsv(await response.text());
