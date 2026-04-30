@@ -48,6 +48,8 @@ BUDGET_SPREADSHEET_ID=
 BUDGET_SYNC_SHEET_NAME=대시보드_입력
 GOOGLE_SERVICE_ACCOUNT_EMAIL=
 GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=
+GOOGLE_CALENDAR_ID=
+GOOGLE_CALENDAR_NAME=일정_NEST
 ```
 
 - `SITE_PASSWORD`: `/login`에서 사용하는 일반 열람 비밀번호
@@ -57,6 +59,8 @@ GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=
 - `BUDGET_SPREADSHEET_ID`: 예산 상세 동기화용 Google Sheet ID
 - `BUDGET_SYNC_SHEET_NAME`: 담당자 입력 탭 이름
 - `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`: 비공개 Google Sheet 서버 읽기용 서비스 계정
+- `GOOGLE_CALENDAR_ID`: 첫 화면 실제 운영 일정용 Google Calendar ID. 없으면 `GOOGLE_CALENDAR_NAME` 이름으로 자동 탐색
+- `GOOGLE_CALENDAR_NAME`: 자동 탐색할 캘린더 이름. 기본값은 `일정_NEST`
 
 ## 데이터 구조
 
@@ -111,6 +115,12 @@ id | 실집행액 | 품의상태 | 보탬e 메모
 시트가 공개 링크로 읽히지 않는 경우 Vercel과 로컬 `.env.local`에 Google 서비스 계정 환경변수를 넣고, 해당 서비스 계정 이메일을 Google Sheet에 보기 권한으로 공유해야 합니다.
 
 관리자 화면 `/admin/budget-detail`의 `양식 CSV`는 현재 예산 상세 123개 항목을 `대시보드_입력` 탭에 붙여넣기 위한 템플릿으로 내려받습니다.
+
+## Google Calendar 일정
+
+첫 화면의 실제 운영 일정은 Google Calendar의 `일정_NEST` 캘린더를 기준으로 표시합니다. 서비스 계정 이메일을 해당 캘린더에 보기 권한으로 공유하고, Google Cloud에서 Google Calendar API를 사용 설정해야 합니다.
+
+`GOOGLE_CALENDAR_ID`가 있으면 해당 ID를 우선 사용하고, 없으면 서비스 계정의 캘린더 목록에서 `GOOGLE_CALENDAR_NAME`과 같은 캘린더를 찾아 사용합니다. 첫 화면은 일정을 `오늘 일정`, `이번 주 일정`, `앞으로 30일`로 나누어 표시합니다.
 
 ## 증빙관리 원칙
 

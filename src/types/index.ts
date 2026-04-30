@@ -225,3 +225,28 @@ export interface OperationsData {
   casePipeline: CasePipelineItem[];
   monthlyReports?: MonthlyReportEntry[];
 }
+
+export interface CalendarEventItem {
+  id: string;
+  title: string;
+  start: string;
+  end: string;
+  allDay: boolean;
+  location: string;
+  htmlLink: string;
+}
+
+export interface CalendarScheduleSection {
+  id: 'today' | 'week' | 'month';
+  title: string;
+  helper: string;
+  events: CalendarEventItem[];
+}
+
+export interface CalendarScheduleData {
+  status: 'ready' | 'not_configured' | 'error';
+  calendarId: string;
+  loadedAt: string;
+  sections: CalendarScheduleSection[];
+  error?: string;
+}
