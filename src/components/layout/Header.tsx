@@ -18,9 +18,20 @@ const PATH_TITLES: Record<string, string> = {
   '/report': '보고서',
 };
 
+function formatTodayLabel() {
+  return new Intl.DateTimeFormat('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    weekday: 'short',
+  }).format(new Date());
+}
+
 export default function Header() {
   const pathname = usePathname();
   const title = PATH_TITLES[pathname] ?? '대시보드';
+  const todayLabel = formatTodayLabel();
 
   return (
     <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
@@ -40,7 +51,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="hidden text-sm text-slate-600 sm:inline">2026.02 기준</span>
+          <span className="hidden text-sm text-slate-600 sm:inline">{todayLabel} 기준</span>
           <Badge variant="amber">열람 전용</Badge>
         </div>
       </div>
