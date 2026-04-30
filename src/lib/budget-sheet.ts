@@ -162,7 +162,7 @@ async function getServiceAccountAccessToken() {
 
   if (!email || !privateKey) return null;
 
-  const key = await importPKCS8(privateKey.replace(/\\n/g, '\n'), 'RS256');
+  const key = await importPKCS8(normalizePrivateKey(privateKey), 'RS256');
   const assertion = await new SignJWT({ scope: GOOGLE_SHEETS_SCOPE })
     .setProtectedHeader({ alg: 'RS256', typ: 'JWT' })
     .setIssuer(email)
@@ -191,6 +191,23 @@ async function getServiceAccountAccessToken() {
   }
 
   return data.access_token;
+}
+
+function normalizePrivateKey(value: string) {
+  let key = value.trim();
+  key = key.replace(/^["']?private_key["']?\s*:\s*/i, '');
+  key = key.replace(/,\s*$/g, '');
+  key = key.replace(/^["']|["']$/g, '');
+  key = key.replace(/\\n/g, '\n').trim();
+
+  const begin = key.indexOf('-----BEGIN PRIVATE KEY-----');
+  const endMarker = '-----END PRIVATE KEY-----';
+  const end = key.indexOf(endMarker);
+  if (begin >= 0 && end >= 0) {
+    key = key.slice(begin, end + endMarker.length);
+  }
+
+  return key;
 }
 
 async function fetchSheetValuesWithServiceAccount(spreadsheetId: string, sheetName: string, accessToken: string) {
