@@ -47,6 +47,39 @@ export interface BudgetProgram {
   labor: number;
 }
 
+export type BudgetDetailApprovalStatus = 'not_requested' | 'requested' | 'approved' | 'paid' | 'needs_review';
+
+export interface BudgetDetailItem {
+  id: string;
+  programId: string;
+  programName: string;
+  sheetName: string;
+  sourceRow: number;
+  category: string;
+  subcategory: string;
+  directCostKey: string;
+  item: string;
+  vendor: string;
+  botemCategory: string;
+  quantity: number;
+  unitPriceWon: number;
+  estimatedAmountWon: number;
+  plannedAmountWon: number;
+  actualAmountWon: number;
+  detailItem: string;
+  plannedMonth: string;
+  approvalStatus: BudgetDetailApprovalStatus;
+  memo: string;
+}
+
+export interface BudgetDetailSource {
+  fileName: string;
+  importedAt: string;
+  amountUnit: 'won';
+  plannedAmountBasis: string;
+  itemCount: number;
+}
+
 export interface BudgetData {
   totalBudget: number;
   byCategory: Record<string, { budget: number; spent: number; ratio: number }>;
@@ -60,6 +93,8 @@ export interface BudgetData {
     overhead: number;
     staff: { name: string; title: string; program: string; role: string; rate?: string }[];
   };
+  detailItems?: BudgetDetailItem[];
+  budgetDetailSource?: BudgetDetailSource;
   lastUpdated: string;
 }
 

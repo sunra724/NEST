@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, CalendarDays, ClipboardCheck, TrendingUp, Users, Wallet } from 'lucide-react';
+import { ArrowRight, CalendarDays, ClipboardCheck, FileText, TrendingUp, Users, Wallet } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -15,6 +15,7 @@ const ACTION_LABELS: Record<string, { label: string; color: string }> = {
   KPI_UPDATE: { label: 'KPI', color: 'bg-blue-100 text-blue-700' },
   BUDGET_PROGRAM_UPDATE: { label: '예산', color: 'bg-amber-100 text-amber-700' },
   BUDGET_MONTHLY_UPDATE: { label: '월별예산', color: 'bg-orange-100 text-orange-700' },
+  BUDGET_DETAIL_UPDATE: { label: '예산상세', color: 'bg-purple-100 text-purple-700' },
   TIMELINE_UPDATE: { label: '일정', color: 'bg-green-100 text-green-700' },
   PARTICIPANT_ADD: { label: '참여자+', color: 'bg-indigo-100 text-indigo-700' },
   PARTICIPANT_DELETE: { label: '참여자-', color: 'bg-red-100 text-red-700' },
@@ -23,6 +24,7 @@ const ACTION_LABELS: Record<string, { label: string; color: string }> = {
 const SHORTCUTS = [
   { href: '/admin/kpi', label: 'KPI 실적 입력', icon: TrendingUp, desc: '프로그램별 current 값 수정' },
   { href: '/admin/budget', label: '예산 집행 입력', icon: Wallet, desc: '집행액, 월별 실집행액 입력' },
+  { href: '/admin/budget-detail', label: '예산서 상세 입력', icon: FileText, desc: '품목별 실집행액, 품의상태, 보탬e 메모 입력' },
   { href: '/admin/operations', label: '운영관리 입력', icon: ClipboardCheck, desc: '증빙, 지원금, 성과측정, 상담 케이스 입력' },
   { href: '/admin/monthly-report', label: '월간보고 입력', icon: CalendarDays, desc: '월별 성과, 이슈, 다음 달 계획 기록' },
   { href: '/admin/timeline', label: '일정 상태 관리', icon: CalendarDays, desc: '태스크 상태 변경' },

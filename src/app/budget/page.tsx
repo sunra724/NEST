@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import BudgetChartsSection from '@/components/dashboard/BudgetChartsSection';
 import { EmptyState, ErrorState } from '@/components/dashboard/PageStates';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -84,7 +85,14 @@ export default async function BudgetPage() {
               <span className="h-5 w-1 rounded bg-[#6366F1]" />
               <h2 className="text-lg font-semibold">예산 총괄</h2>
             </div>
-            <p className="text-sm text-slate-500">(단위: 천원)</p>
+            <div className="flex items-center gap-3">
+              <p className="text-sm text-slate-500">(단위: 천원)</p>
+              {budget.detailItems?.length ? (
+                <Link href="/budget/detail" className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50">
+                  예산서 세부내역
+                </Link>
+              ) : null}
+            </div>
           </div>
           <div className="grid gap-3 md:grid-cols-3">
             <BudgetSummaryCard title="총 예산" value={totalBudget} percent={100} className="bg-gradient-to-br from-violet-100 to-fuchsia-100" />

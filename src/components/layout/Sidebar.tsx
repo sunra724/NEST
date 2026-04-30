@@ -61,7 +61,8 @@ export default function Sidebar({ className }: SidebarProps) {
       <div className="flex-1 overflow-y-auto p-3">
         <div className="space-y-1">
           <MenuItem href="/" label="대시보드" icon={<LayoutDashboard className="h-4 w-4" />} active={isActivePath(pathname, '/')} />
-          <MenuItem href="/budget" label="예산 관리" icon={<Wallet className="h-4 w-4" />} active={isActivePath(pathname, '/budget')} />
+          <MenuItem href="/budget" label="예산 관리" icon={<Wallet className="h-4 w-4" />} active={pathname === '/budget'} />
+          <MenuItem href="/budget/detail" label="예산서 상세" icon={<FileText className="h-4 w-4" />} active={isActivePath(pathname, '/budget/detail')} />
           <MenuItem href="/operations" label="운영관리" icon={<ClipboardCheck className="h-4 w-4" />} active={isActivePath(pathname, '/operations')} />
 
           <div className={cn('rounded-md border border-slate-800', isProgramPath && 'bg-slate-800/70')}>
