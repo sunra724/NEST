@@ -21,13 +21,20 @@ async function readPassword(request: NextRequest) {
   };
 }
 
+function redirectTo(path: string) {
+  return new NextResponse(null, {
+    status: 303,
+    headers: { Location: path },
+  });
+}
+
 export async function POST(request: NextRequest) {
   const { password, jsonRequest } = await readPassword(request);
   const sitePassword = getSitePassword();
 
   if (!sitePassword || password !== sitePassword) {
     if (!jsonRequest) {
-      return NextResponse.redirect(new URL('/login?error=invalid', request.url), 303);
+      return redirectTo('/login?error=invalid');
     }
     return NextResponse.json({ error: '비밀번호가 올바르지 않습니다' }, { status: 401 });
   }
@@ -37,12 +44,12 @@ export async function POST(request: NextRequest) {
     token = await signToken({ role: 'viewer' });
   } catch {
     if (!jsonRequest) {
-      return NextResponse.redirect(new URL('/login?error=config', request.url), 303);
+      return redirectTo('/login?error=config');
     }
     return NextResponse.json({ error: '로그인 설정을 확인해야 합니다' }, { status: 500 });
   }
 
-  const response = jsonRequest ? NextResponse.json({ ok: true }) : NextResponse.redirect(new URL('/', request.url), 303);
+  const response = jsonRequest ? NextResponse.json({ ok: true }) : redirectTo('/');
   response.cookies.set('access_token', token, {
     httpOnly: true,
     sameSite: 'lax',
