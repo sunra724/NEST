@@ -5,6 +5,7 @@ import type { CalendarEventItem, CalendarScheduleData } from '@/types';
 const GOOGLE_CALENDAR_SCOPE = 'https://www.googleapis.com/auth/calendar.readonly';
 const TIME_ZONE = 'Asia/Seoul';
 const DEFAULT_CALENDAR_NAME = '일정_NEST';
+const DEFAULT_NEST_CALENDAR_ID = '17a4bbb0356351ff3474d90090b8c8d50f169bb2afa4af0e42b5f89be4d9b84d@group.calendar.google.com';
 
 interface GoogleCalendarEvent {
   id?: string;
@@ -132,8 +133,17 @@ function groupEvents(events: CalendarEventItem[], today: string) {
   ];
 }
 
-async function findCalendarIdByName(accessToken: string) {
-  const targetName = getEnvValue('GOOGLE_CALENDAR_NAME') ?? DEFAULT_CALENDAR_NAME;
+function getTargetCalendarName() {
+  return getEnvValue('GOOGLE_CALENDAR_NAME') ?? DEFAULT_CALENDAR_NAME;
+}
+
+function getConfiguredCalendarId(targetName: string) {
+  const configuredCalendarId = getEnvValue('GOOGLE_CALENDAR_ID') ?? getEnvValue('NEST_CALENDAR_ID');
+  if (configuredCalendarId) return configuredCalendarId;
+  return targetName === DEFAULT_CALENDAR_NAME ? DEFAULT_NEST_CALENDAR_ID : '';
+}
+
+async function findCalendarIdByName(accessToken: string, targetName: string) {
   const response = await fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList', {
     headers: { Authorization: `Bearer ${accessToken}` },
     cache: 'no-store',
@@ -177,7 +187,8 @@ async function fetchCalendarEvents(calendarId: string, today: string, accessToke
 }
 
 export async function loadNestCalendarSchedule(): Promise<CalendarScheduleData> {
-  const configuredCalendarId = getEnvValue('GOOGLE_CALENDAR_ID') ?? getEnvValue('NEST_CALENDAR_ID') ?? '';
+  const targetName = getTargetCalendarName();
+  const configuredCalendarId = getConfiguredCalendarId(targetName);
   const today = seoulDateString();
 
   try {
@@ -186,14 +197,14 @@ export async function loadNestCalendarSchedule(): Promise<CalendarScheduleData> 
       throw new Error('Google 서비스 계정 환경변수가 설정되지 않았습니다.');
     }
 
-    const calendarId = configuredCalendarId || (await findCalendarIdByName(accessToken));
+    const calendarId = configuredCalendarId || (await findCalendarIdByName(accessToken, targetName));
     if (!calendarId) {
       return {
         status: 'not_configured',
         calendarId,
         loadedAt: new Date().toISOString(),
         sections: groupEvents([], today),
-        error: 'GOOGLE_CALENDAR_ID가 없고, 서비스 계정 캘린더 목록에서 일정_NEST를 찾지 못했습니다.',
+        error: `GOOGLE_CALENDAR_ID가 없고, 서비스 계정 캘린더 목록에서 ${targetName}를 찾지 못했습니다.`,
       };
     }
 
