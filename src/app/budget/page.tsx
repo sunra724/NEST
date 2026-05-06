@@ -9,13 +9,36 @@ import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, Table
 import { loadJSON } from '@/lib/data';
 import { NEST_COLORS } from '@/lib/constants';
 import { formatNumber, formatPercent } from '@/lib/utils';
-import type { BudgetData } from '@/types';
+import type { BudgetData, BudgetDetailItem, BudgetProgram } from '@/types';
 
 export const metadata: Metadata = {
   title: '예산 관리 | 청년 N.E.S.T.',
 };
 
 export const dynamic = 'force-dynamic';
+
+const WON_PER_THOUSAND = 1000;
+
+function thousandWonToWon(value: number) {
+  return value * WON_PER_THOUSAND;
+}
+
+function sumDetailItems(items: BudgetDetailItem[], predicate: (item: BudgetDetailItem) => boolean, key: 'plannedAmountWon' | 'actualAmountWon') {
+  return items.filter(predicate).reduce((acc, item) => acc + item[key], 0);
+}
+
+function getProgramAmountsWon(program: BudgetProgram, detailItems: BudgetDetailItem[]) {
+  const hasDetails = detailItems.length > 0;
+  const isProgramItem = (item: BudgetDetailItem) => item.programId === program.id;
+
+  return {
+    budget: hasDetails ? sumDetailItems(detailItems, isProgramItem, 'plannedAmountWon') : thousandWonToWon(program.budget),
+    direct: hasDetails ? sumDetailItems(detailItems, (item) => isProgramItem(item) && item.category === '직접비', 'plannedAmountWon') : thousandWonToWon(program.direct),
+    indirect: hasDetails ? sumDetailItems(detailItems, (item) => isProgramItem(item) && item.category === '간접비', 'plannedAmountWon') : thousandWonToWon(program.indirect),
+    labor: hasDetails ? sumDetailItems(detailItems, (item) => isProgramItem(item) && item.category === '인건비', 'plannedAmountWon') : thousandWonToWon(program.labor),
+    spent: hasDetails ? sumDetailItems(detailItems, isProgramItem, 'actualAmountWon') : thousandWonToWon(program.spent),
+  };
+}
 
 function BudgetSummaryCard({
   title,
@@ -59,18 +82,25 @@ export default async function BudgetPage() {
     return <EmptyState />;
   }
 
-  const totalBudget = budget.totalBudget;
-  const totalSpent = budget.byProgram.reduce((acc, item) => acc + item.spent, 0);
+  const detailItems = budget.detailItems ?? [];
+  const hasDetailItems = detailItems.length > 0;
+  const programAmounts = budget.byProgram.map((program) => ({
+    ...program,
+    amountsWon: getProgramAmountsWon(program, detailItems),
+  }));
+
+  const totalBudget = hasDetailItems ? sumDetailItems(detailItems, () => true, 'plannedAmountWon') : thousandWonToWon(budget.totalBudget);
+  const totalSpent = hasDetailItems ? sumDetailItems(detailItems, () => true, 'actualAmountWon') : thousandWonToWon(budget.byProgram.reduce((acc, item) => acc + item.spent, 0));
   const totalRemaining = totalBudget - totalSpent;
   const spendPercent = formatPercent(totalSpent, totalBudget);
 
-  const totals = budget.byProgram.reduce(
+  const totals = programAmounts.reduce(
     (acc, item) => {
-      acc.budget += item.budget;
-      acc.direct += item.direct;
-      acc.indirect += item.indirect;
-      acc.labor += item.labor;
-      acc.spent += item.spent;
+      acc.budget += item.amountsWon.budget;
+      acc.direct += item.amountsWon.direct;
+      acc.indirect += item.amountsWon.indirect;
+      acc.labor += item.amountsWon.labor;
+      acc.spent += item.amountsWon.spent;
       return acc;
     },
     { budget: 0, direct: 0, indirect: 0, labor: 0, spent: 0 },
@@ -86,7 +116,7 @@ export default async function BudgetPage() {
               <h2 className="text-lg font-semibold">예산 총괄</h2>
             </div>
             <div className="flex items-center gap-3">
-              <p className="text-sm text-slate-500">(단위: 천원)</p>
+              <p className="text-sm text-slate-500">(단위: 원)</p>
               {budget.detailItems?.length ? (
                 <Link href="/budget/detail" className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50">
                   예산서 세부내역
@@ -104,7 +134,7 @@ export default async function BudgetPage() {
         <section className="rounded-xl bg-white p-6 shadow-sm">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold">프로그램별 예산 테이블</h2>
-            <p className="text-sm text-slate-500">(단위: 천원)</p>
+            <p className="text-sm text-slate-500">(단위: 원)</p>
           </div>
           <div className="overflow-x-auto">
             <Table>
@@ -121,8 +151,8 @@ export default async function BudgetPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {budget.byProgram.map((item) => {
-                  const rowRate = formatPercent(item.spent, item.budget);
+                {programAmounts.map((item) => {
+                  const rowRate = formatPercent(item.amountsWon.spent, item.amountsWon.budget);
                   return (
                     <TableRow key={item.id}>
                       <TableCell>
@@ -131,15 +161,15 @@ export default async function BudgetPage() {
                           <span>{item.name}</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-right tabular-nums">{formatNumber(item.budget)}</TableCell>
-                      <TableCell className="text-right tabular-nums">{formatNumber(item.direct)}</TableCell>
-                      <TableCell className="text-right tabular-nums">{formatNumber(item.indirect)}</TableCell>
-                      <TableCell className="text-right tabular-nums">{formatNumber(item.labor)}</TableCell>
+                      <TableCell className="text-right tabular-nums">{formatNumber(item.amountsWon.budget)}</TableCell>
+                      <TableCell className="text-right tabular-nums">{formatNumber(item.amountsWon.direct)}</TableCell>
+                      <TableCell className="text-right tabular-nums">{formatNumber(item.amountsWon.indirect)}</TableCell>
+                      <TableCell className="text-right tabular-nums">{formatNumber(item.amountsWon.labor)}</TableCell>
                       <TableCell className="text-right tabular-nums">
-                        {item.spent === 0 ? <Badge variant="pending">미집행</Badge> : formatNumber(item.spent)}
+                        {item.amountsWon.spent === 0 ? <Badge variant="pending">미집행</Badge> : formatNumber(item.amountsWon.spent)}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">{rowRate}%</TableCell>
-                      <TableCell className="text-right tabular-nums">{formatNumber(item.budget - item.spent)}</TableCell>
+                      <TableCell className="text-right tabular-nums">{formatNumber(item.amountsWon.budget - item.amountsWon.spent)}</TableCell>
                     </TableRow>
                   );
                 })}
