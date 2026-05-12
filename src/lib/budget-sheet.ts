@@ -1,4 +1,5 @@
 import { getEnvValue } from '@/lib/auth';
+import { getBudgetExecutionStatusLabel } from '@/lib/budget-execution-status';
 import { recomputeBudgetSpent } from '@/lib/budget-utils';
 import { getGoogleServiceAccountAccessToken } from '@/lib/google-service-account';
 import type { BudgetData, BudgetDetailApprovalStatus } from '@/types';
@@ -6,14 +7,6 @@ import type { BudgetData, BudgetDetailApprovalStatus } from '@/types';
 const DEFAULT_SPREADSHEET_ID = '1MBs3E6adF_wK5qlr092eB6l7jfLLLItNFMkwrHkzGWg';
 const DEFAULT_SHEET_NAME = '대시보드_입력';
 const GOOGLE_SHEETS_SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
-
-const STATUS_LABELS: Record<BudgetDetailApprovalStatus, string> = {
-  not_requested: '품의 전',
-  requested: '품의 요청',
-  approved: '품의 승인',
-  paid: '지출완료',
-  needs_review: '보완필요',
-};
 
 export interface BudgetSheetRow {
   rowNumber: number;
@@ -71,7 +64,7 @@ export function getBudgetSheetTemplateUrl() {
 }
 
 export function getStatusLabel(status: BudgetDetailApprovalStatus) {
-  return STATUS_LABELS[status];
+  return getBudgetExecutionStatusLabel(status);
 }
 
 function normalizeHeader(value: string) {
@@ -98,21 +91,25 @@ function normalizeStatus(value: string): BudgetDetailApprovalStatus | null | und
   const byLabel: Record<string, BudgetDetailApprovalStatus> = {
     not_requested: 'not_requested',
     requested: 'requested',
-    approved: 'approved',
+    approved: 'requested',
     paid: 'paid',
-    needs_review: 'needs_review',
+    needs_review: 'requested',
+    집행등록: 'not_requested',
+    등록: 'not_requested',
+    집행요청: 'requested',
+    요청: 'requested',
+    집행완료: 'paid',
+    완료: 'paid',
     품의전: 'not_requested',
     미요청: 'not_requested',
     품의요청: 'requested',
-    요청: 'requested',
-    품의승인: 'approved',
-    승인: 'approved',
+    품의승인: 'requested',
+    승인: 'requested',
     지출완료: 'paid',
     지급완료: 'paid',
-    완료: 'paid',
-    보완필요: 'needs_review',
-    검토필요: 'needs_review',
-    확인필요: 'needs_review',
+    보완필요: 'requested',
+    검토필요: 'requested',
+    확인필요: 'requested',
   };
 
   return byLabel[normalized] ?? null;
@@ -213,7 +210,7 @@ function parseBudgetSheetRows(values: string[][]): ParsedRows {
   const headers = values[0].map((value) => value.trim());
   const idColumn = findColumn(headers, ['id', 'ID', '대시보드ID', '항목ID']);
   const amountColumn = findColumn(headers, ['실집행액', '실지출액', '집행액', '지출액']);
-  const statusColumn = findColumn(headers, ['품의상태', '품의 상태', '상태']);
+  const statusColumn = findColumn(headers, ['집행상태', '집행 상태', '품의상태', '품의 상태', '상태']);
   const memoColumn = findColumn(headers, ['보탬e메모', '보탬e 메모', '메모', '비고']);
 
   if (idColumn === -1) {
@@ -245,7 +242,7 @@ function parseBudgetSheetRows(values: string[][]): ParsedRows {
     if (statusText) {
       const status = normalizeStatus(statusText);
       if (status === null) {
-        skipped.push({ rowNumber, id, reason: `품의상태 형식 오류: ${statusText}` });
+        skipped.push({ rowNumber, id, reason: `집행상태 형식 오류: ${statusText}` });
         return;
       }
       nextRow.approvalStatus = status;

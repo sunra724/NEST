@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import BudgetDetailView from '@/components/dashboard/BudgetDetailView';
 import { EmptyState, ErrorState } from '@/components/dashboard/PageStates';
-import { loadJSON } from '@/lib/data';
-import type { BudgetData } from '@/types';
+import { loadBudgetData } from '@/lib/budget-data';
 
 export const metadata: Metadata = {
   title: '예산서 세부내역 | 청년 N.E.S.T.',
@@ -12,7 +11,7 @@ export const dynamic = 'force-dynamic';
 
 async function getBudgetData() {
   try {
-    return await loadJSON<BudgetData>('budget.json');
+    return await loadBudgetData();
   } catch {
     return null;
   }

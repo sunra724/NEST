@@ -6,10 +6,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { loadJSON } from '@/lib/data';
+import { loadBudgetData } from '@/lib/budget-data';
 import { NEST_COLORS } from '@/lib/constants';
 import { formatNumber, formatPercent } from '@/lib/utils';
-import type { BudgetData, BudgetDetailItem, BudgetProgram } from '@/types';
+import type { BudgetDetailItem, BudgetProgram } from '@/types';
 
 export const metadata: Metadata = {
   title: '예산 관리 | 청년 N.E.S.T.',
@@ -65,7 +65,7 @@ function BudgetSummaryCard({
 
 async function getBudgetData() {
   try {
-    return await loadJSON<BudgetData>('budget.json');
+    return await loadBudgetData();
   } catch {
     return null;
   }

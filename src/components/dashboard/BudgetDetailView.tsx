@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { getBudgetExecutionStatusLabel, getBudgetExecutionStatusVariant, normalizeBudgetExecutionStatus } from '@/lib/budget-execution-status';
 import { formatNumber, formatPercent } from '@/lib/utils';
 import type { BudgetData, BudgetDetailApprovalStatus, BudgetDetailItem } from '@/types';
 
@@ -18,22 +19,6 @@ const PROGRAMS = [
   { id: 'T', label: 'T' },
 ];
 
-const STATUS_LABEL: Record<BudgetDetailApprovalStatus, string> = {
-  not_requested: '품의 전',
-  requested: '품의 요청',
-  approved: '품의 승인',
-  paid: '지출완료',
-  needs_review: '보완필요',
-};
-
-const STATUS_VARIANT: Record<BudgetDetailApprovalStatus, 'pending' | 'info' | 'success' | 'amber'> = {
-  not_requested: 'pending',
-  requested: 'info',
-  approved: 'info',
-  paid: 'success',
-  needs_review: 'amber',
-};
-
 const EMPTY_ITEMS: BudgetDetailItem[] = [];
 
 function wonToThousand(value: number) {
@@ -41,7 +26,7 @@ function wonToThousand(value: number) {
 }
 
 function StatusBadge({ status }: { status: BudgetDetailApprovalStatus }) {
-  return <Badge variant={STATUS_VARIANT[status]}>{STATUS_LABEL[status]}</Badge>;
+  return <Badge variant={getBudgetExecutionStatusVariant(status)}>{getBudgetExecutionStatusLabel(status)}</Badge>;
 }
 
 function SummaryBox({ label, value, helper }: { label: string; value: string; helper: string }) {
@@ -73,8 +58,8 @@ export default function BudgetDetailView({ budget }: BudgetDetailViewProps) {
 
   const planned = sumBy(filtered, (item) => item.plannedAmountWon);
   const actual = sumBy(filtered, (item) => item.actualAmountWon);
-  const paidCount = filtered.filter((item) => item.approvalStatus === 'paid').length;
-  const reviewCount = filtered.filter((item) => item.approvalStatus === 'needs_review').length;
+  const requestedCount = filtered.filter((item) => normalizeBudgetExecutionStatus(item.approvalStatus) === 'requested').length;
+  const paidCount = filtered.filter((item) => normalizeBudgetExecutionStatus(item.approvalStatus) === 'paid').length;
 
   return (
     <div className="space-y-6">
@@ -84,7 +69,7 @@ export default function BudgetDetailView({ budget }: BudgetDetailViewProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Budget Detail</p>
             <h1 className="mt-1 text-2xl font-bold text-slate-900">예산서 세부내역</h1>
             <p className="mt-2 text-sm text-slate-600">
-              남구청 제출 예산서를 기준으로 세부 품목, 보탬e 비목, 지출 예정월, 품의 상태를 추적합니다.
+              남구청 제출 예산서를 기준으로 세부 품목, 보탬e 비목, 지출 예정월, 집행상태를 추적합니다.
             </p>
           </div>
           <Badge variant="outline">{budget.budgetDetailSource?.fileName ?? '예산서'} · {budget.budgetDetailSource?.itemCount ?? items.length}개 항목</Badge>
@@ -94,8 +79,8 @@ export default function BudgetDetailView({ budget }: BudgetDetailViewProps) {
       <section className="grid gap-3 md:grid-cols-4">
         <SummaryBox label="계획 예산" value={`${formatNumber(wonToThousand(planned))}천원`} helper={`${formatNumber(filtered.length)}개 항목`} />
         <SummaryBox label="실집행" value={`${formatNumber(wonToThousand(actual))}천원`} helper={`계획 대비 ${formatPercent(actual, planned)}%`} />
-        <SummaryBox label="지출완료" value={`${formatNumber(paidCount)}건`} helper="품의 상태 기준" />
-        <SummaryBox label="보완필요" value={`${formatNumber(reviewCount)}건`} helper="확인 필요한 항목" />
+        <SummaryBox label="집행요청" value={`${formatNumber(requestedCount)}건`} helper="집행상태 기준" />
+        <SummaryBox label="집행완료" value={`${formatNumber(paidCount)}건`} helper="집행상태 기준" />
       </section>
 
       <section className="rounded-xl bg-white p-4 shadow-sm">
@@ -135,7 +120,7 @@ export default function BudgetDetailView({ budget }: BudgetDetailViewProps) {
                 <TableHead>예정월</TableHead>
                 <TableHead className="text-right">계획</TableHead>
                 <TableHead className="text-right">실집행</TableHead>
-                <TableHead>상태</TableHead>
+                <TableHead>집행상태</TableHead>
                 <TableHead>메모</TableHead>
               </TableRow>
             </TableHeader>

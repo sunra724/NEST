@@ -96,7 +96,7 @@ export default function BudgetSheetSyncPanel({ onSynced }: Props) {
             <UploadCloud className="h-5 w-5 text-indigo-600" />
             <h2 className="text-base font-semibold text-slate-800">Google Sheet 동기화</h2>
           </div>
-          <p className="mt-1 text-sm text-slate-500">대시보드_입력 탭의 실집행액, 품의상태, 보탬e 메모를 예산 상세에 반영합니다.</p>
+          <p className="mt-1 text-sm text-slate-500">대시보드_입력 탭의 실집행액, 집행상태, 보탬e 메모를 예산 상세에 반영합니다.</p>
         </div>
         <div className="flex gap-2">
           <a

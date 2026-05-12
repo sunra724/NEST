@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import MonthlyReportView from '@/components/dashboard/MonthlyReportView';
 import { EmptyState, ErrorState } from '@/components/dashboard/PageStates';
+import { loadBudgetData } from '@/lib/budget-data';
 import { loadJSON } from '@/lib/data';
-import type { BudgetData, KpiData, OperationsData, OverviewData, TimelineData } from '@/types';
+import type { KpiData, OperationsData, OverviewData, TimelineData } from '@/types';
 
 export const metadata: Metadata = {
   title: '월간 운영보고 | 청년 N.E.S.T.',
@@ -15,7 +16,7 @@ async function getMonthlyReportData() {
     return await Promise.all([
       loadJSON<OverviewData>('overview.json'),
       loadJSON<KpiData>('kpi.json'),
-      loadJSON<BudgetData>('budget.json'),
+      loadBudgetData(),
       loadJSON<TimelineData>('timeline.json'),
       loadJSON<OperationsData>('operations.json'),
     ]);

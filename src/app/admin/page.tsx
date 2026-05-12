@@ -25,7 +25,7 @@ const ACTION_LABELS: Record<string, { label: string; color: string }> = {
 const SHORTCUTS = [
   { href: '/admin/kpi', label: 'KPI 실적 입력', icon: TrendingUp, desc: '프로그램별 current 값 수정' },
   { href: '/admin/budget', label: '예산 집행 입력', icon: Wallet, desc: '집행액, 월별 실집행액 입력' },
-  { href: '/admin/budget-detail', label: '예산서 상세 입력', icon: FileText, desc: '품목별 실집행액, 품의상태, 보탬e 메모 입력' },
+  { href: '/admin/budget-detail', label: '예산서 상세 입력', icon: FileText, desc: '품목별 실집행액, 집행상태, 보탬e 메모 입력' },
   { href: '/admin/operations', label: '운영관리 입력', icon: ClipboardCheck, desc: '증빙, 지원금, 성과측정, 상담 케이스 입력' },
   { href: '/admin/monthly-report', label: '월간보고 입력', icon: CalendarDays, desc: '월별 성과, 이슈, 다음 달 계획 기록' },
   { href: '/admin/timeline', label: '일정 상태 관리', icon: CalendarDays, desc: '태스크 상태 변경' },

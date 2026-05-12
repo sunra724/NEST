@@ -5,9 +5,10 @@ import { EmptyState, ErrorState } from '@/components/dashboard/PageStates';
 import KpiProgressSection from '@/components/dashboard/KpiProgressSection';
 import NestFlowDiagram from '@/components/dashboard/NestFlowDiagram';
 import OverviewCards from '@/components/dashboard/OverviewCards';
+import { loadBudgetData } from '@/lib/budget-data';
 import { loadJSON } from '@/lib/data';
 import { loadNestCalendarSchedule } from '@/lib/google-calendar';
-import type { BudgetData, KpiData, OverviewData } from '@/types';
+import type { KpiData, OverviewData } from '@/types';
 
 export const metadata: Metadata = {
   title: '대시보드 | 청년 N.E.S.T.',
@@ -20,7 +21,7 @@ async function getDashboardData() {
     return await Promise.all([
       loadJSON<OverviewData>('overview.json'),
       loadJSON<KpiData>('kpi.json'),
-      loadJSON<BudgetData>('budget.json'),
+      loadBudgetData(),
       loadNestCalendarSchedule(),
     ]);
   } catch {

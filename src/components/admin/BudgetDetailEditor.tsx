@@ -6,6 +6,11 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  BUDGET_EXECUTION_STATUS_OPTIONS,
+  getBudgetExecutionStatusLabel,
+  normalizeBudgetExecutionStatus,
+} from '@/lib/budget-execution-status';
 import { formatNumber, formatPercent } from '@/lib/utils';
 import type { BudgetData, BudgetDetailApprovalStatus, BudgetDetailItem } from '@/types';
 
@@ -22,14 +27,6 @@ const PROGRAMS = [
   { id: 'T', label: 'T' },
 ];
 
-const STATUS_OPTIONS: { value: BudgetDetailApprovalStatus; label: string }[] = [
-  { value: 'not_requested', label: '품의 전' },
-  { value: 'requested', label: '품의 요청' },
-  { value: 'approved', label: '품의 승인' },
-  { value: 'paid', label: '지출완료' },
-  { value: 'needs_review', label: '보완필요' },
-];
-
 const EMPTY_ITEMS: BudgetDetailItem[] = [];
 
 interface RowEdit {
@@ -39,7 +36,7 @@ interface RowEdit {
 }
 
 function getStatusLabel(status: BudgetDetailApprovalStatus) {
-  return STATUS_OPTIONS.find((option) => option.value === status)?.label ?? status;
+  return getBudgetExecutionStatusLabel(status);
 }
 
 export default function BudgetDetailEditor({ data, onSaved }: Props) {
@@ -61,7 +58,13 @@ export default function BudgetDetailEditor({ data, onSaved }: Props) {
   function getEdit(itemId: string) {
     const item = items.find((entry) => entry.id === itemId);
     if (!item) return null;
-    return edits[itemId] ?? { actualAmountWon: item.actualAmountWon, approvalStatus: item.approvalStatus, memo: item.memo };
+    return (
+      edits[itemId] ?? {
+        actualAmountWon: item.actualAmountWon,
+        approvalStatus: normalizeBudgetExecutionStatus(item.approvalStatus),
+        memo: item.memo,
+      }
+    );
   }
 
   async function saveItem(itemId: string) {
@@ -140,7 +143,7 @@ export default function BudgetDetailEditor({ data, onSaved }: Props) {
                 <TableHead>보탬e 비목</TableHead>
                 <TableHead className="text-right">계획</TableHead>
                 <TableHead className="text-right">실집행</TableHead>
-                <TableHead>품의상태</TableHead>
+                <TableHead>집행상태</TableHead>
                 <TableHead>메모</TableHead>
                 <TableHead />
               </TableRow>
@@ -150,7 +153,9 @@ export default function BudgetDetailEditor({ data, onSaved }: Props) {
                 const edit = getEdit(item.id);
                 if (!edit) return null;
                 const changed =
-                  edit.actualAmountWon !== item.actualAmountWon || edit.approvalStatus !== item.approvalStatus || edit.memo !== item.memo;
+                  edit.actualAmountWon !== item.actualAmountWon ||
+                  edit.approvalStatus !== normalizeBudgetExecutionStatus(item.approvalStatus) ||
+                  edit.memo !== item.memo;
                 return (
                   <TableRow key={item.id}>
                     <TableCell>
@@ -181,7 +186,7 @@ export default function BudgetDetailEditor({ data, onSaved }: Props) {
                           setEdits((prev) => ({ ...prev, [item.id]: { ...edit, approvalStatus: event.target.value as BudgetDetailApprovalStatus } }))
                         }
                       >
-                        {STATUS_OPTIONS.map((option) => (
+                        {BUDGET_EXECUTION_STATUS_OPTIONS.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
                           </option>
@@ -192,7 +197,7 @@ export default function BudgetDetailEditor({ data, onSaved }: Props) {
                     <TableCell>
                       <Input
                         className="w-56"
-                        placeholder="보탬e 번호, 품의 메모 등"
+                        placeholder="보탬e 번호, 집행 메모 등"
                         value={edit.memo}
                         onChange={(event) => setEdits((prev) => ({ ...prev, [item.id]: { ...edit, memo: event.target.value } }))}
                       />

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { EmptyState, ErrorState } from '@/components/dashboard/PageStates';
 import QuarterReportView from '@/components/dashboard/QuarterReportView';
+import { loadBudgetData } from '@/lib/budget-data';
 import { loadJSON } from '@/lib/data';
-import type { BudgetData, KpiData, OverviewData } from '@/types';
+import type { KpiData, OverviewData } from '@/types';
 
 export const metadata: Metadata = {
   title: '보고서 | 청년 N.E.S.T.',
@@ -15,7 +16,7 @@ async function getReportData() {
     return await Promise.all([
       loadJSON<OverviewData>('overview.json'),
       loadJSON<KpiData>('kpi.json'),
-      loadJSON<BudgetData>('budget.json'),
+      loadBudgetData(),
     ]);
   } catch {
     return null;

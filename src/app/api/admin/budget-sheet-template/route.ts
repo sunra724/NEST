@@ -19,7 +19,7 @@ export async function GET() {
   }
 
   const data = await readJSON<BudgetData>('budget.json');
-  const headers = ['id', '사업', '구분', '품목', '세부품목', '보탬e 비목', '계획금액', '실집행액', '품의상태', '보탬e 메모'];
+  const headers = ['id', '사업', '구분', '품목', '세부품목', '보탬e 비목', '계획금액', '실집행액', '집행상태', '보탬e 메모'];
   const rows = (data.detailItems ?? []).map((item) => [
     item.id,
     item.programId,
@@ -29,7 +29,7 @@ export async function GET() {
     item.botemCategory,
     item.plannedAmountWon,
     item.actualAmountWon || '',
-    item.approvalStatus === 'not_requested' ? '' : getStatusLabel(item.approvalStatus),
+    getStatusLabel(item.approvalStatus),
     item.memo,
   ]);
 

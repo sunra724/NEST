@@ -30,7 +30,7 @@ export default function BudgetDetailAdminClient({ initialData }: Props) {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-800">예산서 세부 집행 입력</h1>
-        <p className="mt-1 text-sm text-slate-500">남구청 제출 예산서 항목별 실집행액, 품의상태, 보탬e 메모를 입력합니다.</p>
+        <p className="mt-1 text-sm text-slate-500">남구청 제출 예산서 항목별 실집행액, 집행상태, 보탬e 메모를 입력합니다.</p>
       </div>
 
       {error ? <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div> : null}
