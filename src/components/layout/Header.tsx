@@ -16,6 +16,7 @@ const PATH_TITLES: Record<string, string> = {
   '/programs/t': '프로그램 > [T] 안심전월세 지킴이',
   '/timeline': '추진 일정',
   '/report': '보고서',
+  '/report/evidence-documents': '증빙서류 만들기',
 };
 
 function formatTodayLabel() {

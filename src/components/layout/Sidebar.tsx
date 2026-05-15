@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarDays, ChevronDown, ClipboardCheck, FileText, FolderKanban, LayoutDashboard, Lock, Wallet } from 'lucide-react';
+import { CalendarDays, ChevronDown, ClipboardCheck, FileImage, FileText, FolderKanban, LayoutDashboard, Lock, Wallet } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NEST_COLORS } from '@/lib/constants';
@@ -93,7 +93,13 @@ export default function Sidebar({ className }: SidebarProps) {
 
           <MenuItem href="/timeline" label="추진 일정" icon={<CalendarDays className="h-4 w-4" />} active={isActivePath(pathname, '/timeline')} />
           <MenuItem href="/monthly-report" label="월간보고" icon={<FileText className="h-4 w-4" />} active={isActivePath(pathname, '/monthly-report')} />
-          <MenuItem href="/report" label="보고서" icon={<FileText className="h-4 w-4" />} active={isActivePath(pathname, '/report')} />
+          <MenuItem href="/report" label="보고서" icon={<FileText className="h-4 w-4" />} active={pathname === '/report'} />
+          <MenuItem
+            href="/report/evidence-documents"
+            label="증빙서류 만들기"
+            icon={<FileImage className="h-4 w-4" />}
+            active={isActivePath(pathname, '/report/evidence-documents')}
+          />
         </div>
       </div>
 
