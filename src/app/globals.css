@@ -51,6 +51,10 @@ body {
     font-size: 14pt;
   }
 
+  .evidence-sheet-page h1 {
+    font-size: 21pt !important;
+  }
+
   .page-break {
     page-break-before: always;
   }
