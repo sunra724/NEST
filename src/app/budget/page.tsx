@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import BudgetChartsSection from '@/components/dashboard/BudgetChartsSection';
 import { EmptyState, ErrorState } from '@/components/dashboard/PageStates';
+import SubsidySpendingGuide from '@/components/dashboard/SubsidySpendingGuide';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -130,6 +131,8 @@ export default async function BudgetPage() {
             <BudgetSummaryCard title="잔액" value={totalRemaining} percent={formatPercent(totalRemaining, totalBudget)} className="border border-slate-200 bg-slate-50" />
           </div>
         </section>
+
+        <SubsidySpendingGuide />
 
         <section className="rounded-xl bg-white p-6 shadow-sm">
           <div className="mb-4 flex items-center justify-between">

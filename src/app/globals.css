@@ -12,6 +12,11 @@ body {
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
 }
 
+.subsidy-critical-keyword {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
 @media print {
   @page {
     size: A4;
