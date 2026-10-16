@@ -1,0 +1,7 @@
+{
+  "kind": "sql",
+  "sources": [
+    "supabase/schema.sql",
+    "supabase/add-operations-document.sql"
+  ]
+}

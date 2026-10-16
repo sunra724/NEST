@@ -10,7 +10,9 @@ export function getEnvValue(name: string): string | undefined {
 }
 
 function getJwtSecret() {
-  return new TextEncoder().encode(getEnvValue('JWT_SECRET') ?? 'fallback-secret');
+  const secret = getEnvValue('JWT_SECRET');
+  if (!secret) throw new Error('JWT_SECRET must be configured');
+  return new TextEncoder().encode(secret);
 }
 
 function getJwtExpiresIn() {

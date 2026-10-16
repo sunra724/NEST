@@ -1,0 +1,52 @@
+{
+  "project": "NEST",
+  "ref": "zmoxhgjsztrcbsspleuz",
+  "reviewedTargets": [
+    {
+      "schema": "public",
+      "table": "_prisma_migrations",
+      "classification": "server_only",
+      "anon": [],
+      "authenticated": [],
+      "test": "supabase/tests/rls_permissions.test.sql"
+    }
+  ],
+  "baselineRelations": [
+    "public._prisma_migrations",
+    "public.users",
+    "public.user_roles",
+    "public.roles",
+    "public.stakeholders",
+    "public.indicators",
+    "public.additionality_assessments",
+    "public.verifications",
+    "public.credit_ledger",
+    "public.incentive_calcs",
+    "public.credits",
+    "public.audit_logs",
+    "public.evidence_files",
+    "public.projects",
+    "public.dashboard_documents",
+    "spc._prisma_migrations",
+    "spc.users",
+    "spc.roles",
+    "spc.user_roles",
+    "spc.companies",
+    "spc.recognition_checks",
+    "spc.proxy_valuations",
+    "spc.evidence_files",
+    "spc.audit_logs",
+    "spc.social_performance_items",
+    "spc.incentive_calculations",
+    "spc.projects",
+    "spc.project_companies",
+    "spc.proxy_research_queries"
+  ],
+  "existingBaselineReview": "Only warning targets classified by this patch; remaining baseline objects require their own access review",
+  "blockingQuestions": [],
+  "exposedSchemas": [
+    "public",
+    "graphql_public"
+  ],
+  "testClaimsAreSynthetic": true
+}
