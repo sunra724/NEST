@@ -17,7 +17,7 @@ export const DOCUMENT_KEYS = [
 
 export type DashboardDocumentKey = (typeof DOCUMENT_KEYS)[number];
 
-const DATA_DIR = join(process.cwd(), 'public', 'data');
+const DATA_DIR = join(process.cwd(), 'server-data');
 
 let supabaseAdmin: SupabaseClient | null = null;
 

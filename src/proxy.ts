@@ -21,6 +21,14 @@ function redirectToLogin(request: NextRequest, pathname: string) {
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  let documentPath: string;
+  try { documentPath = decodeURIComponent(pathname).replaceAll('\\', '/'); }
+  catch { return new NextResponse(null, { status: 404, headers: { 'Cache-Control': 'no-store' } }); }
+
+  // Local fallback documents are server inputs. Readers must use the role-filtered API.
+  if (documentPath === '/data' || documentPath.startsWith('/data/')) {
+    return new NextResponse(null, { status: 404, headers: { 'Cache-Control': 'no-store' } });
+  }
 
   if (PUBLIC_PATHS.includes(pathname) || PUBLIC_API_PREFIXES.some((path) => pathname.startsWith(path))) {
     return NextResponse.next();
@@ -62,5 +70,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)'],
+  matcher: ['/data/:path*', '/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)'],
 };

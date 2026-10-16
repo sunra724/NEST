@@ -10,7 +10,7 @@
 - GitHub 저장소: `https://github.com/sunra724/NEST.git`
 - 배포: Vercel
 - 데이터 저장소: Supabase `dashboard_documents`
-- 로컬 fallback 데이터: `public/data/*.json`
+- 로컬 fallback 데이터: `server-data/*.json`
 
 ## 기술 스택
 
@@ -77,7 +77,7 @@ Supabase 사용 시 `dashboard_documents` 테이블에 아래 문서 키를 저�
 - `operations`
 - `changelog`
 
-Supabase 환경변수가 없으면 같은 키를 기준으로 `public/data/*.json` 파일을 읽는 fallback 구조입니다.
+Supabase 환경변수가 없으면 같은 키를 기준으로 `server-data/*.json` 파일을 읽는 fallback 구조입니다.
 Supabase에 특정 문서가 아직 없을 때도 같은 로컬 JSON을 읽어 기본 화면이 깨지지 않게 합니다. 새 문서 키를 추가할 때는 `supabase/schema.sql`의 check constraint도 함께 갱신해야 합니다.
 
 ## 관리자 기능

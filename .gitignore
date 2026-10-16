@@ -43,3 +43,8 @@ next-dev.err
 *.tsbuildinfo
 next-env.d.ts
 .env.local
+
+# Disposable security verification artifacts
+/rls-ci-evidence.json
+/query-surface-evidence.json
+/supabase-test-db.log

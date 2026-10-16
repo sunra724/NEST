@@ -30,7 +30,7 @@ const supabase = createClient(url, serviceRoleKey, {
   },
 });
 
-const dataDir = join(process.cwd(), 'public', 'data');
+const dataDir = join(process.cwd(), 'server-data');
 const rows = await Promise.all(
   DOCUMENT_KEYS.map(async (key) => {
     const raw = await readFile(join(dataDir, `${key}.json`), 'utf8');

@@ -1,0 +1,115 @@
+{
+  "source": "Audited catalog metadata, no rows or function bodies",
+  "collectedAt": "2026-10-14T08:15:37.978Z",
+  "ref": "zmoxhgjsztrcbsspleuz",
+  "existingRlsTables": [
+    {
+      "schema": "public",
+      "name": "users"
+    },
+    {
+      "schema": "public",
+      "name": "user_roles"
+    },
+    {
+      "schema": "public",
+      "name": "roles"
+    },
+    {
+      "schema": "public",
+      "name": "stakeholders"
+    },
+    {
+      "schema": "public",
+      "name": "indicators"
+    },
+    {
+      "schema": "public",
+      "name": "additionality_assessments"
+    },
+    {
+      "schema": "public",
+      "name": "verifications"
+    },
+    {
+      "schema": "public",
+      "name": "credit_ledger"
+    },
+    {
+      "schema": "public",
+      "name": "incentive_calcs"
+    },
+    {
+      "schema": "public",
+      "name": "credits"
+    },
+    {
+      "schema": "public",
+      "name": "audit_logs"
+    },
+    {
+      "schema": "public",
+      "name": "evidence_files"
+    },
+    {
+      "schema": "public",
+      "name": "projects"
+    },
+    {
+      "schema": "public",
+      "name": "dashboard_documents"
+    },
+    {
+      "schema": "spc",
+      "name": "users"
+    },
+    {
+      "schema": "spc",
+      "name": "roles"
+    },
+    {
+      "schema": "spc",
+      "name": "user_roles"
+    },
+    {
+      "schema": "spc",
+      "name": "companies"
+    },
+    {
+      "schema": "spc",
+      "name": "recognition_checks"
+    },
+    {
+      "schema": "spc",
+      "name": "proxy_valuations"
+    },
+    {
+      "schema": "spc",
+      "name": "evidence_files"
+    },
+    {
+      "schema": "spc",
+      "name": "audit_logs"
+    },
+    {
+      "schema": "spc",
+      "name": "social_performance_items"
+    },
+    {
+      "schema": "spc",
+      "name": "incentive_calculations"
+    },
+    {
+      "schema": "spc",
+      "name": "projects"
+    },
+    {
+      "schema": "spc",
+      "name": "project_companies"
+    },
+    {
+      "schema": "spc",
+      "name": "proxy_research_queries"
+    }
+  ]
+}

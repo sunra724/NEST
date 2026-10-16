@@ -26,8 +26,9 @@ function redirectTo(path: string) {
 
 export async function POST(request: NextRequest) {
   const { password, jsonRequest } = await readPassword(request);
+  const adminPassword = getEnvValue('ADMIN_PASSWORD');
 
-  if (password !== getEnvValue('ADMIN_PASSWORD')) {
+  if (!adminPassword || typeof password !== 'string' || password !== adminPassword) {
     if (!jsonRequest) {
       return redirectTo('/admin/login?error=invalid');
     }
