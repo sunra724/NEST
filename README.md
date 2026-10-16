@@ -41,7 +41,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - `/admin/login`: 관리자 비밀번호(`ADMIN_PASSWORD`)로 접속
 - `/admin`: KPI, 예산, 일정, 참여자 데이터를 수정하는 관리자 모드
 
-Supabase 환경변수가 설정되어 있으면 관리자 수정 데이터는 Supabase `dashboard_documents`에 저장됩니다. 환경변수가 없으면 로컬 `public/data/*.json`을 fallback으로 사용합니다.
+Supabase 환경변수가 설정되어 있으면 관리자 수정 데이터는 Supabase `dashboard_documents`에 저장됩니다. 환경변수가 없으면 로컬 `server-data/*.json`을 fallback으로 사용합니다.
 
 ## 🔐 관리자 기능
 

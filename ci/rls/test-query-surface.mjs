@@ -11,7 +11,11 @@ for (const file of ['.env', '.env.local', '.env.production', '.env.production.lo
   try { await fs.access(file); throw new Error('Refuse an app checkout containing environment files'); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
 }
-const fixturePath = 'public/data/program-n.json';
+const fixturePath = 'server-data/program-n.json';
+try {
+  const publicFiles = await fs.readdir('public/data');
+  assert.equal(publicFiles.some(file => file.endsWith('.json')), false, 'Raw fallback documents must not be deployed as public assets');
+} catch (error) { if (error.code !== 'ENOENT') throw error; }
 const original = await fs.readFile(fixturePath);
 const fixture = JSON.parse(original);
 const privateMarkers = ['synthetic-contact-unique', 'synthetic-registration-unique', 'synthetic-memo-unique'];
@@ -57,7 +61,7 @@ try {
   const viewerCookie = await login(base, '/api/auth', viewerPassword);
   const adminCookie = await login(base, '/api/admin/auth', adminPassword);
   for (const [actor, cookie] of [['anon', ''], ['viewer', viewerCookie], ['admin', adminCookie]]) {
-    for (const path of ['/data/program-n.json', '/data/operations.json', '/data/program-n%2Ejson']) {
+    for (const path of ['/data/program-n.json', '/data/operations.json', '/data/program-n%2Ejson', '/%64ata/program-n.json', '/data%2Fprogram-n.json']) {
       const response = await fetch(base + path, { headers: { Cookie: cookie }, redirect: 'manual' });
       check(actor + ' direct JSON blocked: ' + path, response.status, 404);
       check(actor + ' direct JSON not cached: ' + path, response.headers.get('cache-control'), 'no-store');

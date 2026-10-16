@@ -21,9 +21,12 @@ function redirectToLogin(request: NextRequest, pathname: string) {
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  let documentPath: string;
+  try { documentPath = decodeURIComponent(pathname).replaceAll('\\', '/'); }
+  catch { return new NextResponse(null, { status: 404, headers: { 'Cache-Control': 'no-store' } }); }
 
   // Local fallback documents are server inputs. Readers must use the role-filtered API.
-  if (pathname === '/data' || pathname.startsWith('/data/')) {
+  if (documentPath === '/data' || documentPath.startsWith('/data/')) {
     return new NextResponse(null, { status: 404, headers: { 'Cache-Control': 'no-store' } });
   }
 

@@ -2,7 +2,7 @@
 
 ## Protected query surface
 
-Raw local `/data/*.json` files previously bypassed the authenticated API because the Proxy matcher excluded dotted paths. The review branch returns 404/no-store for `/data` and all descendants, including authenticated users; local server reads and seeding continue to work. Normal viewer API responses keep only participant cohorts and aggregates, while the admin API retains original fields. A production-build HTTP test uses a synthetic local participant and verifies both roles, direct-file denials and server-rendered output. This identifies an access-control path, not evidence that real participant information was downloaded.
+Raw local `/data/*.json` files previously bypassed the authenticated API because the Proxy matcher excluded dotted paths. The review branch moves all fallback JSON into server-data outside public assets, updates server reads/seeding, and returns 404/no-store for /data and encoded variants, including authenticated users. Server reads and seeding continue to work. Normal viewer API responses keep only participant cohorts and aggregates, while the admin API retains original fields. A production-build HTTP test uses a synthetic local participant and verifies both roles, direct-file denials and server-rendered output. This identifies an access-control path, not evidence that real participant information was downloaded.
 
 JWT signing now fails when JWT_SECRET is absent, and missing ADMIN_PASSWORD cannot authenticate an empty JSON body. Missing configuration and the former fallback signature have explicit HTTP denial tests. No production credentials or settings are changed.
 
